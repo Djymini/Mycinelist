@@ -3,6 +3,7 @@ import './App.css';
 import Page from "./Manager/Page";
 import Header from "./components/Header";
 import MovieCard from "./components/Card";
+import ButtonNavigateRight from "./components/ButtonNavigateRight";
 
 const test = {
         "adult": false,
@@ -27,7 +28,7 @@ const test = {
 function App() {
   return (
    <Page title={"Prototype"}>
-       <MovieCard movie={test} />
+       <Header />
    </Page>
   );
 }

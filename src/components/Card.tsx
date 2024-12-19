@@ -1,9 +1,7 @@
 import React from 'react';
 import {FC} from 'react';
-import {MovieItem as MovieType} from "../types/MovieItem";
-import Button from '@mui/material/Button';
+import {MovieItem as MovieType} from "../@types/MovieItem";
 import IconButton from '@mui/material/IconButton';
-import SvgIcon from '@mui/material/SvgIcon';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 const MovieCard: FC<{movie:MovieType}> = ({movie}) => {
