@@ -8,6 +8,7 @@ const richBlack = '#0D1B2A';
 
 export const Search = styled('div')(({theme}) => ({
     color: richBlack,
+    fontFamily: '"Kanit", serif',
     position: 'relative',
     height: '72px',
     borderRadius: 64,
@@ -56,6 +57,7 @@ export const StyledInputBase = styled(InputBase)(({theme}) => ({
 
 export const LogButton = styled(Button)<ButtonProps>(({theme}) => ({
     color: richBlack,
+    fontFamily: '"Kanit", serif',
     textTransform: 'none',
     height: '72px',
     fontSize: '20px',

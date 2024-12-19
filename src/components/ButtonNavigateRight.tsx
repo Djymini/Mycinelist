@@ -6,9 +6,9 @@ import {buttonSize} from "../_styles/ButtonNavigateStyle";
 
 
 
-const ButtonNavigateRight: FC<{}> = ({}) => {
+const ButtonNavigateRight: FC<{ changeCarousel: any }> = ({changeCarousel}) => {
     return (
-        <Button variant="contained" sx={buttonSize}>
+        <Button variant="contained" sx={buttonSize} onClick={changeCarousel}>
             <NavigateNextIcon sx={{fontSize:80}}/>
         </Button>
     );

@@ -10,15 +10,40 @@ root {
     font-style: normal;
 }
 
-.hedvig-letters-sans-regular {
-    font-family: "Hedvig Letters Sans", serif;
+.kanit-thin {
+    font-family: "Kanit", serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.kanit-extralight {
+    font-family: "Kanit", serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.kanit-light {
+    font-family: "Kanit", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.kanit-regular {
+    font-family: "Kanit", serif;
     font-weight: 400;
     font-style: normal;
 }
 
+.kanit-medium {
+    font-family: "Kanit", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
 
 body {
-    font-family: "Hedvig Letters Sans", sans-serif!important;
+    font-family: "Kanit", sans-serif!important;
     background: linear-gradient(#1B263B, #24314b);
     height: 100%;
     background-repeat: no-repeat;
@@ -87,12 +112,19 @@ nav a {
     color: #E0E1DD;
     background-size: cover;
     border-radius: 5px;
-    width: 293px;
-    height: 430px;
+    width: 412px;
+    height: 620px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
+    transition: 0.3s;
+}
+.movie-card:hover {
+    width: 435px;
+    height: 654px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .movie-card-info {
@@ -114,4 +146,26 @@ nav a {
     align-items: center;
     justify-content: center;
     grid-column: 2;
+}
+
+.section-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-elements{
+    display: inline-flex;
+}
+
+.carousel .name-carousel {
+    color: #E0E1DD;
+    font-size: 30px;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+
+.movie-card {
+    margin: 10px;
+    box-shadow: 2px 2px 5px black;
 }
