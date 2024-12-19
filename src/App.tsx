@@ -4,6 +4,7 @@ import Page from "./Manager/Page";
 import Header from "./components/Header";
 import MovieCard from "./components/Card";
 import ButtonNavigateRight from "./components/ButtonNavigateRight";
+import ButtonNavigateLeft from "./components/ButtonNavigateLeft";
 
 const test = {
         "adult": false,
@@ -28,7 +29,8 @@ const test = {
 function App() {
   return (
    <Page title={"Prototype"}>
-       <Header />
+      <ButtonNavigateRight/>
+       <ButtonNavigateLeft/>
    </Page>
   );
 }

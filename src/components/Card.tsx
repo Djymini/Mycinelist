@@ -1,6 +1,6 @@
 import React from 'react';
 import {FC} from 'react';
-import {MovieItem as MovieType} from "../@types/MovieItem";
+import {MovieItem as MovieType} from "../_types/MovieItem";
 import IconButton from '@mui/material/IconButton';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 

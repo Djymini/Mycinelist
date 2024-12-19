@@ -1,17 +1,16 @@
 import React from 'react';
 import {FC} from 'react';
 import Button from '@mui/material/Button';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import {buttonSize} from "../_styles/ButtonNavigateStyle";
 
 
-
-const ButtonNavigateRight: FC<{}> = ({}) => {
+const ButtonNavigateLeft: FC<{}> = ({}) => {
     return (
         <Button variant="contained" sx={buttonSize}>
-            <NavigateNextIcon sx={{fontSize:80}}/>
+            <NavigateBeforeIcon sx={{fontSize: 80}}/>
         </Button>
     );
 };
 
-export default ButtonNavigateRight;
+export default ButtonNavigateLeft;
