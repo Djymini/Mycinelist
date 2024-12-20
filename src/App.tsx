@@ -19,11 +19,11 @@ function App() {
         }
     }
   return (
-      <AuthContext.Provider value={{isLogged, setIsLogged}}>
           <BrowserRouter>
+              <AuthContext.Provider value={{isLogged, setIsLogged}}>
               <Router/>
+              </AuthContext.Provider>
           </BrowserRouter>
-      </AuthContext.Provider>
   );
 }
 
