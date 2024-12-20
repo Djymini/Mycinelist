@@ -11,7 +11,7 @@ const Navbar: FC = ({}) => {
                 <h1>MYCINELIST</h1>
                 <div className="navbar-element">
                     <nav>
-                        <a href="/">Accueil</a>
+                        <a href="/Home">Accueil</a>
                         <a href="/">Parcourir</a>
                     </nav>
                     <span className="vertical-line"></span>

@@ -1,8 +1,9 @@
 import {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
 import Home from "../pages/Home";
+import LayoutLogged from "../layouts/LayoutLogged";
 
-const MyComponent: FC<{}> = ({}) => {
+const Router: FC<{}> = ({}) => {
     return (
         <Routes>
             <Route path="/" element={<LayoutLogged/>}>
@@ -12,4 +13,4 @@ const MyComponent: FC<{}> = ({}) => {
     );
 };
 
-export default MyComponent;
+export default Router;

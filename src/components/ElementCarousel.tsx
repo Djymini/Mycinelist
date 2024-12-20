@@ -7,6 +7,7 @@ import {MovieItem} from "../@types/MovieItem";
 
 const movieArray = movieData.results.sort((a, b) => 0.5 - Math.random());
 
+
 const carouselProperties = [
     {
         name: 'Proposition du jour',
@@ -21,7 +22,7 @@ const carouselProperties = [
     {
         name: 'Vieux cinéma',
         status: 'oldMovie',
-        searchMovies: movieArray.filter((item: MovieItem) => Number(item.release_date.substring(0, 4)) <= 2005).slice(0, 3),
+        searchMovies: movieArray.filter((item: MovieItem) => Number(item.release_date.substring(0, 4)) <= 2000).slice(0, 3),
     }
 ];
 

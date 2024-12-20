@@ -7,7 +7,6 @@ import Page from "../Manager/Page";
 const Home: FC<{}> = ({}) => {
     return (
         <Page title={"Accueil"}>
-            <Header/>
             <body>
             <CarouselHomePage/>
             </body>
