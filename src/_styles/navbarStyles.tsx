@@ -52,7 +52,7 @@ export const NavButton = styled(Button)<ButtonProps>(({theme}) => ({
     fontWeight: 500,
     textTransform: 'none',
     height: '56px',
-    fontSize: '30px',
+    fontSize: '25px',
     borderRadius: '24px',
     backgroundColor: buttonColor,
 }));

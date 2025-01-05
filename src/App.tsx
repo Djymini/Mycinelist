@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Header from "./pages/a_header/Header";
 import {Helmet} from "react-helmet-async";
+import Home from "./pages/b_main/Home";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                       rel="stylesheet"/>
               </Helmet>
               <Header/>
+              <Home/>
           </>
   );
 }
