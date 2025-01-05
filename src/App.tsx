@@ -4,6 +4,8 @@ import Header from "./pages/a_header/Header";
 import {Helmet} from "react-helmet-async";
 import Home from "./pages/b_main/Home";
 import Footer from "./pages/c_footer/Footer";
+import MovieItem from "./components/explorer/MovieItem";
+import Explorer from "./pages/b_main/Explorer";
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
                       rel="stylesheet"/>
               </Helmet>
               <Header/>
-              <Home/>
+              <Explorer/>
               <Footer/>
           </>
   );
