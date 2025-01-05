@@ -17,7 +17,6 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 8px 16px;
-    background-color: blue;
 }
 
 .navbar-elements {
@@ -44,10 +43,6 @@ h1 {
 
 .vertical-line {
     margin: auto 0;
-}
-
-main {
-    background-color: red;
 }
 
 #carousel-home {
@@ -111,6 +106,18 @@ main {
     justify-content: space-around;
     width: 100%;
     margin-top: 32px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8px;
+}
+
+footer a {
+    text-decoration: none;
+    margin: auto;
+    color: inherit;
 }
 
 

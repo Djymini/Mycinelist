@@ -3,6 +3,7 @@ import './App.css';
 import Header from "./pages/a_header/Header";
 import {Helmet} from "react-helmet-async";
 import Home from "./pages/b_main/Home";
+import Footer from "./pages/c_footer/Footer";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
               </Helmet>
               <Header/>
               <Home/>
+              <Footer/>
           </>
   );
 }
