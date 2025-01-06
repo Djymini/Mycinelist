@@ -22,25 +22,16 @@ import TimeFilter from "../home/TimeFilter";
 
 
 
-const DrawerExplorer: FC<{}> = ({}) => {
+const DrawerExplorer: FC<{}> = () => {
 
     return (
         <Box sx={{width: '20vw', padding: '0 40px 0 16px'}} role="presentation">
             <h3>Filtres</h3>
             <Divider/>
-            <h4>Texte</h4>
-            <DrawerSearch>
-                <DrawerStyledInputBase
-                    placeholder="Search…"
-                    inputProps={{'aria-label': 'search'}}
-                />
-            </DrawerSearch>
-            <Divider/>
             <DrawerCheckBoxList/>
             <Divider/>
             <h4>Date</h4>
-            <TimeFilter/>
-
+            <TimeFilter />
         </Box>
     );
 };

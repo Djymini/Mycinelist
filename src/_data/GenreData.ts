@@ -1,78 +1,97 @@
 export const GenreData = [
     {
       "id": 28,
-      "name": "Action"
+      "name": "Action",
+        "checked": false
     },
     {
       "id": 12,
-      "name": "Aventure"
+      "name": "Aventure",
+        "checked": false
     },
     {
       "id": 16,
-      "name": "Animation"
+      "name": "Animation",
+        "checked": false
     },
     {
       "id": 35,
-      "name": "Comédie"
+      "name": "Comédie",
+        "checked": false
     },
     {
       "id": 80,
-      "name": "Crime"
+      "name": "Crime",
+        "checked": false
     },
     {
       "id": 99,
-      "name": "Documentaire"
+      "name": "Documentaire",
+        "checked": false
     },
     {
       "id": 18,
-      "name": "Drame"
+      "name": "Drame",
+        "checked": false
     },
     {
       "id": 10751,
-      "name": "Familial"
+      "name": "Familial",
+        "checked": false
     },
     {
       "id": 14,
-      "name": "Fantastique"
+      "name": "Fantastique",
+        "checked": false
     },
     {
       "id": 36,
-      "name": "Histoire"
+      "name": "Histoire",
+        "checked": false
     },
     {
       "id": 27,
-      "name": "Horreur"
+      "name": "Horreur",
+        "checked": false
     },
     {
       "id": 10402,
-      "name": "Musique"
+      "name": "Musique",
+        "checked": false
     },
     {
       "id": 9648,
-      "name": "Mystère"
+      "name": "Mystère",
+        "checked": false
     },
     {
       "id": 10749,
-      "name": "Romance"
+      "name": "Romance",
+        "checked": false
     },
     {
       "id": 878,
-      "name": "Science-Fiction"
+      "name": "Science-Fiction",
+        "checked": false
     },
     {
       "id": 10770,
-      "name": "Téléfilm"
+      "name": "Téléfilm",
+        "checked": false
     },
     {
       "id": 53,
-      "name": "Thriller"
+      "name": "Thriller",
+        "checked": false
     },
     {
       "id": 10752,
-      "name": "Guerre"
+      "name": "Guerre",
+        "checked": false
     },
     {
       "id": 37,
-      "name": "Western"
+      "name": "Western",
+        "checked": false
     }
   ]

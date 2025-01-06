@@ -5,22 +5,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HomeCardMovie from "./HomeCardMovie";
 
-const CarouselHomePage: FC<{}> = ({}) => {
-    let arrayCarousel = [
-        {
-            "title": "aléatoire",
-        },
-        {
-            "title": "à l'affiche",
-        },
-        {
-            "title": "ancien film",
-        },
-        {
-            "title": "dans ma liste",
-        }
-    ]
-
+const CarouselHomePage: FC<{arrayCarousel:any}> = ({arrayCarousel}) => {
     const [indexCarousel, setIndexCarousel] = useState(0);
 
     function handleNavigateBefore() {
@@ -46,7 +31,7 @@ const CarouselHomePage: FC<{}> = ({}) => {
                 <IconButton aria-label="navigate-before" onClick={handleNavigateBefore} sx={{height: '200px', width: '200px'}}>
                     <NavigateBeforeIcon sx={{fontSize: '300px', color: '#0D1B2A'}}/>
                 </IconButton>
-                <HomeCardMovie />
+                <HomeCardMovie movie={arrayCarousel[indexCarousel].result}/>
                 <IconButton aria-label="navigate-next" onClick={handleNavigateNext} sx={{height: '200px', width: '200px'}}>
                     <NavigateNextIcon sx={{fontSize: '300px', color: '#0D1B2A'}}/>
                 </IconButton>

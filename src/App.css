@@ -110,11 +110,13 @@ footer a {
 
 #home-card-infos h3 {
     margin-bottom: 0;
-    font-size: 25px;
+    font-size: 40px;
 }
 
 #home-card-infos p {
     margin-bottom: 0;
+    font-size: 25px;
+    font-style: italic;
 }
 
 #home-card-button-container {
@@ -125,6 +127,7 @@ footer a {
 }
 
 .movie-item {
+    width: 240px;
     border-radius: 12px;
     margin-left: 32px;
     margin-bottom: 16px;

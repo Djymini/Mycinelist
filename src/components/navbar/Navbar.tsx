@@ -6,16 +6,18 @@ import CreateIcon from '@mui/icons-material/Create';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from '@mui/material/Stack';
 import {NavButton, Search, SearchIconWrapper, StyledInputBase} from "../../_styles/navbarStyles";
+import {useNavigate} from "react-router-dom";
 
 
 const Navbar: FC<{}> = ({}) => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="navbar-elements">
                 <h1>MYCINELIST</h1>
                 <nav>
-                    <a href="/">Accueil</a>
-                    <a href="/">Explorer</a>
+                    <a href="/Home">Accueil</a>
+                    <a href="/Explorer">Explorer</a>
                     <a href="/">Tableau de bord</a>
                 </nav>
                 <div className="vertical-line" style={{borderLeft: '2px solid', height: '47px'}}></div>
