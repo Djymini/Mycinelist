@@ -5,7 +5,7 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import MovieItem from "../explorer/MovieItem";
 
 const HomeCardMovie: FC<{movie:any}> = ({movie}) => {
-
+    const path = `/MovieDetails/${movie.id}`;
     const hoursAndMinutes = (totalMinutes: number) => {
         const minutes = totalMinutes % 60;
         const hours = Math.floor(totalMinutes / 60);
@@ -15,7 +15,9 @@ const HomeCardMovie: FC<{movie:any}> = ({movie}) => {
 
     return (
         <div id="home-card">
-            <img id="home-card-image" src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} width={'50%'}/>
+            <a href={path}>
+                <img id="home-card-image" src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} width={'50%'}/>
+            </a>
             <div id="home-card-infos">
                 <h3>{movie.title}</h3>
                 <p>{movie.release_date}</p>

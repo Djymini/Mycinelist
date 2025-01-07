@@ -3,8 +3,6 @@ import {FC} from 'react';
 import CarouselHomePage from "../../components/home/CarouselHomePage";
 import Page from "../../components/Layout/Page";
 import {get} from "../../api/api";
-import {Movies} from "../../@types/Movies";
-import {MovieType} from "../../@types/movieType";
 
 
 const Home: FC<{}> = ({}) => {
@@ -19,7 +17,7 @@ const Home: FC<{}> = ({}) => {
         // @ts-ignore
         startTransition(async () => {
             let movieListGlobalResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&sort_by=popularity.desc`);
-            let movieListOldResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&release_date.lte=${Math.random() * (2010 - 1895) + 1895}-12-31&sort_by=popularity.desc`);
+            let movieListOldResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&release_date.lte=2005-12-31&sort_by=popularity.desc`);
             let movieListFrResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&sort_by=popularity.desc&with_origin_country=FR`);
             let movieListRecentResult = await get("/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&release_date.gte=2024-11-01&sort_by=popularity.desc");
             let movieListAnimation = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&sort_by=popularity.desc&with_genres=16`);
