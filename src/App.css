@@ -235,4 +235,13 @@ aside {
     margin-top: 80px;
 }
 
+#form-link-mdp {
+    text-align: left;
+    margin-bottom: 64px;
+}
+
+#form-link-sign {
+    text-align: center;
+}
+
 

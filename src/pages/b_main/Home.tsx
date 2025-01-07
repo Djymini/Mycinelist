@@ -72,16 +72,13 @@ const Home: FC<{}> = ({}) => {
         },
     ]
 
-
     return (
         <Page title={"Accueil"}>
-                <main>
-                    {!isPending && movieGlobalChoose &&
-                        <>
-                            <CarouselHomePage arrayCarousel={chooseMovie}/>
-                        </>
-                    }
-                </main>
+            {!isPending && movieGlobalChoose &&
+                <>
+                    <CarouselHomePage arrayCarousel={chooseMovie}/>
+                </>
+            }
         </Page>
     );
 };

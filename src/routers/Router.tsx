@@ -4,6 +4,8 @@ import Home from "../pages/b_main/Home";
 import Explorer from "../pages/b_main/Explorer";
 import LayoutWithBar from "../layouts/LayoutWithBar";
 import MovieDetails from "../pages/b_main/MovieDetails";
+import WithoutLayoutBar from "../layouts/WithoutLayoutBar";
+import Login from "../pages/b_main/Login";
 
 const Router: FC<{}> = ({}) => {
     return (
@@ -13,6 +15,9 @@ const Router: FC<{}> = ({}) => {
                 <Route path="/Explorer" index element={<Explorer/>}/>
                 <Route path="/Home" index element={<Home/>}/>
                 <Route path="/" index element={<Home/>}/>
+            </Route>
+            <Route path="/" element={<WithoutLayoutBar/>}>
+                <Route path="/Login" index element={<Login/>}/>
             </Route>
         </Routes>
     );

@@ -4,7 +4,7 @@ import DrawerExplorer from "../../components/explorer/DrawerExplorer";
 import Page from "../../components/Layout/Page";
 import {get} from "../../api/api";
 import {Movies} from "../../@types/Movies";
-import {AuthContextExp} from "../../contexts/AuthContext";
+import {AuthContextExp} from "../../contexts/AuthContextExplorer";
 
 interface MovieCollection {
     results: Movies[];

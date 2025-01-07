@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { GenreData } from "../../_data/GenreData";
 import Box from "@mui/material/Box";
-import { AuthContextExp } from "../../contexts/AuthContext";
+import { AuthContextExp } from "../../contexts/AuthContextExplorer";
 import { MovieGenre } from "../../@types/movieGenre";
 
 const DrawerCheckBoxList: FC<{}> = ({}) => {

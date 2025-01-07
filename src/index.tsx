@@ -10,9 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-      <HelmetProvider>
-          <App/>
-      </HelmetProvider>
+      <App/>
   </React.StrictMode>
 );
 
