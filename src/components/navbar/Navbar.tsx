@@ -8,6 +8,7 @@ import {NavButton, Search, SearchIconWrapper, StyledInputBase} from "../../_styl
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from "react-router-dom";
+import Searchbar from "./Searchbar";
 
 const Navbar: FC<{}> = ({}) => {
     const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -29,15 +30,7 @@ const Navbar: FC<{}> = ({}) => {
                         <a href="/Explorer">Explorer</a>
                     </nav>}
                     <div className="vertical-line" style={{borderLeft: '2px solid', height: '47px'}}></div>
-            <Search>
-                <SearchIconWrapper>
-                    <SearchIcon/>
-                </SearchIconWrapper>
-                <StyledInputBase
-                    placeholder="Rechercher"
-                    inputProps={{'aria-label': 'search'}}
-                />
-            </Search>
+            <Searchbar/>
             </div>
             {isLogged ?
                 <Stack direction="row" spacing={2}>
