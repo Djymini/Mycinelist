@@ -4,7 +4,7 @@ import DrawerExplorer from "../../components/explorer/DrawerExplorer";
 import Page from "../../components/Layout/Page";
 import {get} from "../../api/api";
 import {Movies} from "../../@types/Movies";
-import {AuthContextExp} from "../../contexts/AuthContextExplorer";
+import {ExpContext} from "../../contexts/ExplorerContext";
 
 interface MovieCollection {
     results: Movies[];
@@ -33,7 +33,7 @@ const Explorer: FC<{}> = ({}) => {
     }, []);
 
     return (
-        <AuthContextExp.Provider value={{year1, setYear1, year2, setYear2, hydrateCollection, genre, setGenre}}>
+        <ExpContext.Provider value={{year1, setYear1, year2, setYear2, hydrateCollection, genre, setGenre}}>
             <Page title={"Explorer"}>
                 <main>
                     <aside>
@@ -46,7 +46,7 @@ const Explorer: FC<{}> = ({}) => {
                     </section>
                 </main>
             </Page>
-        </AuthContextExp.Provider>
+        </ExpContext.Provider>
     );
 };
 

@@ -3,20 +3,22 @@ import {FC, useEffect, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import {get} from "../../api/api";
 import {Movies} from "../../@types/Movies";
+import {palletteColor} from "../../_styles/palletteColor";
+import {navbarScroller, navbarScrollerButtonP, navbarScrollerList} from "../../_styles/navbarStyles";
 
-const Searchbar: FC<{}> = ({}) => {
+const Searchbar: FC = () => {
     const [movieSearch, setMovieSearch] = useState<Movies[]>([]);
     const [isPending, setIsPending] = useState<boolean>(false);
     const [query, setQuery] = useState<string>(''); // Etat pour la recherche
     const [isHoveringScroller, setIsHoveringScroller] = useState<boolean>(false);
+    const [isHoveringSearchBar, setIsHoveringSearchBar] = useState<boolean>(false);
 
 
-    // Fonction pour hydrater la collection de films depuis l'API
-    const hydrateCollection = async (key: string) => {
+    const updateProposition = async (key: string) => {
         setIsPending(true);
         try {
             let movieListResult = await get(`/search/movie?query=${key}&include_adult=false&language=fr-FR&page=1`);
-            setMovieSearch(movieListResult.results); // Mise à jour de l'état avec les résultats
+            setMovieSearch(movieListResult.results);
         } catch (error) {
             console.error('Error loading movies:', error);
         } finally {
@@ -26,52 +28,62 @@ const Searchbar: FC<{}> = ({}) => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            hydrateCollection(query);
-        }, 1500); // Délai de 500ms
+            updateProposition(query);
+        }, 1000);
 
-        return () => clearTimeout(timer); // Nettoyer le timer lors du démontage
-    }, [query]);// Le useEffect est déclenché à chaque changement du query
+        return () => clearTimeout(timer);
+    }, [query]);
+
+    useEffect(() => {
+        eraseSearchBarText()
+    }, [isHoveringSearchBar, isHoveringScroller]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value); // Mise à jour du texte de recherche
+        setQuery(event.target.value);
     }
 
-    const handleBlur = () => {
-        if (!isHoveringScroller) {
-            setQuery(''); // Réinitialiser le champ de recherche si on ne survole pas le scroller
+    const eraseSearchBarText = () => {
+        if (!isHoveringScroller && !isHoveringSearchBar) {
+            setQuery('');
         }
     };
 
-    // Fonctions pour gérer l'entrée et la sortie du survol sur le scroller
-    const handleMouseEnter = () => {
-        console.log('MouseEnter');
-        setIsHoveringScroller(true); // On survole le scroller
+    const handleMouseEnterScroller = () => {
+        setIsHoveringScroller(true);
     };
 
-    const handleMouseLeave = () => {
-        console.log('MouseLeave');
-        setIsHoveringScroller(false); // On ne survole plus le scroller
+    const handleMouseLeaveScroller = () => {
+        setIsHoveringScroller(false);
+    };
+
+    const handleMouseEnterSearchBar = () => {
+        setIsHoveringSearchBar(true);
+    };
+
+    const handleMouseLeaveSearchBar = () => {
+        setIsHoveringSearchBar(false);
     };
 
     return (
         <>
-            {/* Champ de recherche */}
             <TextField
                 label="Recherche"
                 id="input-search"
                 value={query}
                 onChange={handleChange}
-                onMouseLeave={handleBlur}
+                onMouseEnter={handleMouseEnterSearchBar}
+                onMouseLeave={handleMouseLeaveSearchBar}
                 fullWidth
-                disabled={isPending} // Désactive le champ pendant que les résultats sont en train de se charger
+                disabled={isPending}
+                style={{backgroundColor: palletteColor.buttonColor, borderRadius: '32px', marginLeft: '16px', width: '300px'}}
             />
 
-            <ul className="scroller" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <ul className="scroller" style={navbarScroller} onMouseEnter={handleMouseEnterScroller} onMouseLeave={handleMouseLeaveScroller}>
                 {movieSearch.map((movie) => (
-                    <li key={movie.id}>
+                    <li key={movie.id} style={navbarScrollerList}>
                         <button type="button" onClick={() => window.location.href = `/MovieDetails/${movie.id}`}>
-                            <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} height={'100px'}/>
-                            <p>{movie.title}</p>
+                            <img alt={movie.title} src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} height={'100px'}/>
+                            <p style={navbarScrollerButtonP}>{movie.title}</p>
                         </button>
                     </li>
                 ))}

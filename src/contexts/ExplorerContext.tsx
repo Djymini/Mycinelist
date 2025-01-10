@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 
-interface AuthContextExplorer {
+interface ExplorerContext {
     year1: number;
     setYear1: any;
     year2: number;
@@ -11,4 +11,4 @@ interface AuthContextExplorer {
     setGenre: any;
 }
 
-export const AuthContextExp = createContext<AuthContextExplorer | undefined>(undefined);
+export const ExpContext = createContext<ExplorerContext | undefined>(undefined);

@@ -19,30 +19,11 @@ header {
     padding: 8px 16px;
 }
 
-.navbar-elements {
-    display: flex;
-}
-
 h1 {
     font-family: "Goldman", serif;
     font-weight: 700;
     font-size: 40px;
     margin: auto 64px auto 0;
-}
-
-.navbar-elements nav {
-    margin: auto 0;
-
-}
-
-.navbar-elements a {
-    text-decoration: none;
-    color: inherit;
-    margin: 0 16px 0 0;
-}
-
-.vertical-line {
-    margin: auto 0;
 }
 
 main {
@@ -61,31 +42,6 @@ footer a {
     color: inherit;
 }
 
-#carousel-home {
-    margin: 8px auto;
-    background-color: var(--background-color);
-    width: 1786px;
-    height: 784px;
-    padding: 1px 16px 0 16px;
-    border-radius: 16px;
-}
-
-#carousel-home h2 {
-    font-weight: 600;
-    font-size: 40px;
-    width: 100%;
-    text-align: center;
-    font-style: italic;
-    color: var(--text-color);
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-#carousel-home-elements {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
 
 #home-card {
     position: relative;
@@ -251,27 +207,6 @@ aside {
     text-align: center;
 }
 
-.scroller {
-    padding: 0;
-    background-color: var(--button-color);
-    position: absolute;
-    z-index: 99;
-    left: 30%;
-    top: 36px;
-    width: 600px;
-    height: auto;
-    max-height: 450px;
-    overflow-y: scroll;
-    scrollbar-color: rebeccapurple green;
-    scrollbar-width: auto;
-    border-radius: 5px;
-    box-shadow: 8px 8px 16px 8px var(black);
-    transition: height 1s ease-in-out;
-}
-
-.scroller li {
-    list-style: none;
-}
 
 .scroller button {
     font-size: 20px;
@@ -288,10 +223,6 @@ aside {
 .scroller button:hover {
     background-color: var(--background-color);
     cursor: pointer;
-}
-
-.scroller p {
-    margin: auto 0 auto 8px;
 }
 
 

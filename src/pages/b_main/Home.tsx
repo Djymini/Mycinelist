@@ -3,77 +3,69 @@ import {FC} from 'react';
 import CarouselHomePage from "../../components/home/CarouselHomePage";
 import Page from "../../components/Layout/Page";
 import {get} from "../../api/api";
-import {Suspense} from 'react';
-import {MovieType} from "../../@types/movieType";
-import Loading from "../../components/home/Loading";
+import {MovieType} from "../../@types/MovieType";
 
+interface Selection {
+    "title": string,
+    "movieResult": MovieType,
+    "path_API": string,
+}
 
-const Home: FC<{}> = ({}) => {
+const Home: FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [movieOldChoose, setMovieOldChoose] = useState<MovieType>();
-    const [movieFrChoose, setMovieFrChoose] = useState<MovieType>();
-    const [movieRecenthoose, setMovieRecentChoose] = useState<MovieType>();
-    const [movieAnimationChoose, setMovieAnimation] = useState<MovieType>();
+    const [movieHome, setMovieHome] = useState<Selection[]>([]);
     const [isPending, startTransition] = useTransition()
+    const [index, setIndex] = useState(0);
 
-    const hydrateCollection = () => {
-        // @ts-ignore
-        startTransition(async () => {
-            let movieListRecentResult = await get("/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&release_date.gte=2024-11-01&sort_by=popularity.desc");
-            let movieListOldResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&release_date.lte=2005-12-31&sort_by=popularity.desc`);
-            let movieListFrResult = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&sort_by=popularity.desc&with_origin_country=FR`);
-            let movieListAnimation = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${Math.random() * (10 - 1) + 1}&sort_by=popularity.desc&with_genres=16`);
-
-            const randomMovieRecent = movieListRecentResult.results[Math.floor(Math.random() * movieListRecentResult.results.length)];
-            const randomMovieOld = movieListOldResult.results[Math.floor(Math.random() * movieListOldResult.results.length)];
-            const randomMovieFr = movieListFrResult.results[Math.floor(Math.random() * movieListFrResult.results.length)];
-            const randomMovieAnimation = movieListAnimation.results[Math.floor(Math.random() * movieListAnimation.results.length)];
-
-            const movieRecentChoose = await get(`/movie/${randomMovieRecent.id}?language=fr-FR',`);
-            const movieOldChoose = await get(`/movie/${randomMovieOld.id}?language=fr-FR',`);
-            const movieFrChoose = await get(`/movie/${randomMovieFr.id}?language=fr-FR',`);
-            const movieAnimationChoose = await get(`/movie/${randomMovieAnimation.id}?language=fr-FR',`);
-
-            startTransition(()=>{
-                setMovieFrChoose(movieFrChoose);
-                setMovieOldChoose(movieOldChoose);
-                setMovieRecentChoose(movieRecentChoose);
-                setMovieAnimation(movieAnimationChoose);
-                setIsLoading(isPending);
-            })
-        })
-
-    }
-
-    useEffect(() => {
-        hydrateCollection()
-    }, []);
-
-    let chooseMovie = [
+    const arrayForSelection = [
         {
             "title": "Récent",
-            "result": movieRecenthoose
+            "path": "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&release_date.gte=2024-11-01&sort_by=popularity.desc",
         },
         {
-            "title": "Ancien film",
-            "result": movieOldChoose
+            "title": "Ancient film",
+            "path": "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + Math.floor(Math.random() * 20) + 1 + "&release_date.lte=2005-12-31&sort_by=popularity.desc",
         },
         {
             "title": "Film français",
-            "result": movieFrChoose
-        },
-        {
+            "path": "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + Math.floor(Math.random() * 20) + 1 + "&sort_by=popularity.desc&with_origin_country=FR",
+        }, {
             "title": "Film d'animation",
-            "result": movieAnimationChoose
-        },
+            "path": "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + Math.floor(Math.random() * 20) + 1 + "&sort_by=popularity.desc&with_genres=16",
+        }
     ]
+
+    const SetupSelection = (title: string, pathAPI: string) => {
+        // @ts-ignore
+        startTransition(async () => {
+            let callApi = await get(pathAPI)
+            let randomChoiceInList = callApi.results[Math.floor(Math.random() * callApi.results.length)];
+            let movieApiResult = await get(`/movie/${randomChoiceInList.id}?language=fr-FR',`);
+            const selection: Selection = {title: title, movieResult: movieApiResult, path_API: pathAPI};
+
+            startTransition(() => {
+                setMovieHome(prevState => prevState.concat(selection));
+            })
+    })
+    }
+
+    useEffect(() => {
+        SetupSelection(arrayForSelection[index].title, arrayForSelection[index].path);
+        setIsLoading(isPending);
+    }, [index]);
+
+    useEffect(() => {
+        if (index < 3) {
+            setIndex(index + 1);
+        }
+    }, [movieHome]);
 
     return (
         <Page title={"Accueil"}>
             {isLoading ? (
-                <CarouselHomePage arrayCarousel={chooseMovie} isLoading={isLoading}/>
-            ) : movieOldChoose ? (
-                <CarouselHomePage arrayCarousel={chooseMovie} isLoading={isLoading}/>
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading}/>
+            ) : movieHome[0] ? (
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading}/>
             ) : (
                 <div>Aucune donnée disponible</div>
             )}

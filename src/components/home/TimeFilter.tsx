@@ -1,10 +1,10 @@
 import React, {useState, FC, useContext} from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import {AuthContextExp} from "../../contexts/AuthContextExplorer";
+import {ExpContext} from "../../contexts/ExplorerContext";
 
 const TimeFilter: FC<{}> = () => {
-    const authContext = useContext(AuthContextExp)
+    const authContext = useContext(ExpContext)
     const minDistance = 0;
     const [value1, setValue1] = React.useState<number[]>([1895, 2025]);
 

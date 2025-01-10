@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState, useTransition} from 'react';
 import Page from "../../components/Layout/Page";
 import {useParams} from "react-router-dom";
 import {get} from "../../api/api";
-import {MovieType} from "../../@types/movieType";
+import {MovieType} from "../../@types/MovieType";
 import {CastType} from "../../@types/CastType";
 import CarouselDetails from "../../components/others/CarouselDetails";
 

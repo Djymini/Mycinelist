@@ -7,10 +7,10 @@ import MovieDetails from "../pages/b_main/MovieDetails";
 import WithoutLayoutBar from "../layouts/WithoutLayoutBar";
 import Login from "../pages/b_main/Login";
 
-const Router: FC<{}> = ({}) => {
+const NoAuthentificationRouter: FC<{}> = ({}) => {
     return (
         <Routes>
-            <Route path="/" element={<LayoutWithBar isLogged={true}/>}>
+            <Route path="/" element={<LayoutWithBar isLogged={false}/>}>
                 <Route path="/MovieDetails/:id" index element={<MovieDetails/>}/>
                 <Route path="/Explorer" index element={<Explorer/>}/>
                 <Route path="/Home" index element={<Home/>}/>
@@ -23,4 +23,4 @@ const Router: FC<{}> = ({}) => {
     );
 };
 
-export default Router;
+export default NoAuthentificationRouter;

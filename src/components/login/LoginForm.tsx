@@ -1,9 +1,37 @@
 import React, {FC} from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {Box, Button, TextField} from "@mui/material";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../contexts/AuthentificationContext";
+import {SubmitHandler, useForm} from "react-hook-form";
+
+interface LoginFormInput {
+    email: string
+    password: string
+}
 
 const LoginForm: FC<{}> = ({}) => {
+    const navigate = useNavigate()
+    const {dispatch} = useAuth()
+
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        defaultValues: {
+            email: "",
+            password: "",
+        },
+    })
+
+    const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
+        console.log(data)
+        console.log(errors);
+        // Simulation d'une requête d'authentification
+        const fakeToken = '12345'; // Normalement obtenu depuis l'API
+        dispatch({type: 'LOGIN', payload: {token: fakeToken}})
+        setTimeout(() => {
+            navigate('/');
+        }, 50);
+    };
+
+
     return (
         <Box
             component="form"
@@ -28,12 +56,14 @@ const LoginForm: FC<{}> = ({}) => {
             }}
             noValidate
             autoComplete="off"
+            onSubmit={handleSubmit(onSubmit)}
         >
             <TextField
                 id="email"
                 label="Email"
                 variant="outlined"
                 sx={{marginBottom: 8, width: '100%', fontFamily: 'Chakra Petch, serif', fontSize: '16px', color: '#1B263B'}}
+                {...register("email")}
             />
             <TextField
                 id="password"
@@ -41,11 +71,13 @@ const LoginForm: FC<{}> = ({}) => {
                 variant="outlined"
                 type="password"
                 sx={{marginBottom: 1, width: '100%', fontFamily: 'Chakra Petch, serif', fontSize: '16px', color: '#1B263B'}}
+                {...register("password")}
             />
             <a id="form-link-mdp" href="">Mot de passe oublié ?</a>
             <Button
                 variant="contained"
                 sx={{marginBottom: 3, width: '100%', padding: '10px', fontFamily: 'Chakra Petch, serif', fontSize: '16px'}}
+                type="submit"
             >
                 Se connecter
             </Button>

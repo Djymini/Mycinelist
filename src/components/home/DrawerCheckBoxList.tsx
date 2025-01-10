@@ -8,11 +8,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { GenreData } from "../../_data/GenreData";
 import Box from "@mui/material/Box";
-import { AuthContextExp } from "../../contexts/AuthContextExplorer";
+import { ExpContext } from "../../contexts/ExplorerContext";
 import { MovieGenre } from "../../@types/movieGenre";
 
 const DrawerCheckBoxList: FC<{}> = ({}) => {
-    const authContext = useContext(AuthContextExp);
+    const authContext = useContext(ExpContext);
 
     // Utilisation d'un état pour suivre les genres sélectionnés
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]); // Liste des genres sélectionnés (par ID)
