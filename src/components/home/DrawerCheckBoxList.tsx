@@ -9,10 +9,9 @@ import Checkbox from '@mui/material/Checkbox';
 import { GenreData } from "../../_data/GenreData";
 import Box from "@mui/material/Box";
 import { ExpContext } from "../../contexts/ExplorerContext";
-import { MovieGenre } from "../../@types/movieGenre";
 
 const DrawerCheckBoxList: FC<{}> = ({}) => {
-    const authContext = useContext(ExpContext);
+    const expContext = useContext(ExpContext);
 
     // Utilisation d'un état pour suivre les genres sélectionnés
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]); // Liste des genres sélectionnés (par ID)
@@ -35,13 +34,13 @@ const DrawerCheckBoxList: FC<{}> = ({}) => {
         } else {
             setSelectedGenres(prev => prev.filter(id => id !== genreId));  // Retirer l'ID si la case est décochée
         }
-        authContext?.hydrateCollection();
+        expContext?.hydrateCollection();
     };
 
     // Mettre à jour le contexte chaque fois que la liste des genres sélectionnés change
     React.useEffect(() => {
-        authContext?.setGenre(selectedGenres.toString());
-    }, [selectedGenres, authContext]);
+        expContext?.setGenre(selectedGenres.toString());
+    }, [selectedGenres, expContext]);
 
     return (
         <Box>

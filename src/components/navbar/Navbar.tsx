@@ -10,8 +10,7 @@ import {useNavigate} from "react-router-dom";
 import Searchbar from "./Searchbar";
 import {useAuth} from "../../contexts/AuthentificationContext";
 
-const Navbar: FC<{userIsLogged:boolean}> = ({userIsLogged}) => {
-    const isLogged = userIsLogged;
+const Navbar: FC<{isLogged:boolean}> = ({isLogged}) => {
     const navigate = useNavigate();
     const {dispatch} = useAuth();
 
@@ -30,7 +29,7 @@ const Navbar: FC<{userIsLogged:boolean}> = ({userIsLogged}) => {
                     <nav style={navbarElementNav}>
                         <a href="/Home" style={navbarElementA}>Accueil</a>
                         <a href="/Explorer" style={navbarElementA}>Explorer</a>
-                        <a href="/" style={navbarElementA}>Tableau de bord</a>
+                        <a href="/Dashboard" style={navbarElementA}>Tableau de bord</a>
                     </nav>
                     :
                     <nav style={navbarElementNav}>

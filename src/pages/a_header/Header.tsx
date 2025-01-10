@@ -5,7 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 const Header: FC<{isLogged:boolean}> = ({isLogged}) => {
     return (
         <header>
-            <Navbar userIsLogged={isLogged}/>
+            <Navbar isLogged={isLogged}/>
         </header>
     );
 };

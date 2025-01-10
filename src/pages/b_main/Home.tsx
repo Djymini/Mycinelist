@@ -11,7 +11,7 @@ interface Selection {
     "path_API": string,
 }
 
-const Home: FC = () => {
+const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [movieHome, setMovieHome] = useState<Selection[]>([]);
     const [isPending, startTransition] = useTransition()
@@ -63,9 +63,9 @@ const Home: FC = () => {
     return (
         <Page title={"Accueil"}>
             {isLoading ? (
-                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading}/>
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading} isLogged={isLogged}/>
             ) : movieHome[0] ? (
-                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading}/>
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading} isLogged={isLogged}/>
             ) : (
                 <div>Aucune donnée disponible</div>
             )}

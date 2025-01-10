@@ -7,7 +7,7 @@ import Loading from "./Loading";
 import {carouselHome, carouselHomeElements, h2CarouselHomePageStyle} from "../../_styles/carouselHomePageStyle";
 
 
-const CarouselHomePage: FC<{arrayForCarousel:any, isLoading:boolean}> = ({arrayForCarousel, isLoading}) => {
+const CarouselHomePage: FC<{arrayForCarousel:any, isLoading:boolean, isLogged:boolean}> = ({arrayForCarousel, isLoading, isLogged}) => {
     const [indexCarousel, setIndexCarousel] = useState<number>(0);
 
     function handleNavigateBefore() {
@@ -40,7 +40,7 @@ const CarouselHomePage: FC<{arrayForCarousel:any, isLoading:boolean}> = ({arrayF
                                     sx={{height: '100px', width: '100px'}}>
                             <NavigateBeforeIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
                         </IconButton>
-                        <HomeCardMovie movie={arrayForCarousel[indexCarousel].movieResult}/>
+                        <HomeCardMovie movie={arrayForCarousel[indexCarousel].movieResult} isLogged={isLogged}/>
                         <IconButton aria-label="navigate-next" onClick={handleNavigateNext}
                                     sx={{height: '100px', width: '100px'}}>
                             <NavigateNextIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>

@@ -6,7 +6,7 @@ import {MovieType} from "../../@types/MovieType";
 import {CastType} from "../../@types/CastType";
 import CarouselDetails from "../../components/others/CarouselDetails";
 
-const MovieDetails: FC<{}> = ({}) => {
+const MovieDetails: FC<{isLogged:boolean}> = ({isLogged}) => {
     const [movie, setMovie] = useState<MovieType>();
     const [cast, setCast] = useState<CastType[]>([]);
     const [crew, setCrew] = useState<CastType[]>([]);
