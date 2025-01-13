@@ -4,7 +4,7 @@ import CarouselHomePage from "../../components/home/CarouselHomePage";
 import Page from "../../components/Layout/Page";
 import {get} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
-import CarousellDashboard from "../../components/Dashboard/CarousellDashboard";
+import CarousellDashboard from "../../components/Dashboard/CarouselList";
 
 
 const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {

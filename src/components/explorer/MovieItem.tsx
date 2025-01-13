@@ -1,10 +1,6 @@
-import React, {useState, FC} from 'react';
-import {Movies} from "../../@types/Movies";
+import React, {FC} from 'react';
 import {MovieType} from "../../@types/MovieType";
 
-interface MovieCollection {
-    results: MovieType[];
-}
 
 const MovieItem: FC<{ movie: MovieType}> = ({movie}) => {
     const changeTheDate = (date: string) => {
@@ -40,6 +36,7 @@ const MovieItem: FC<{ movie: MovieType}> = ({movie}) => {
     }
 
     const path = `/MovieDetails/${movie.id}`;
+
     return (
         <div className="movie-item">
             <a href={path}>

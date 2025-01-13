@@ -2,7 +2,7 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import Page from "../../components/Layout/Page";
 import {MovieType} from "../../@types/MovieType";
 import {UserContext} from "../../contexts/UserMovieContext";
-import CarouselDashboard from "../../components/Dashboard/CarousellDashboard";
+import CarouselList from "../../components/Dashboard/CarouselList";
 
 const DashBoard: FC = () => {
     const userContext = useContext(UserContext);
@@ -49,10 +49,10 @@ const DashBoard: FC = () => {
                     </div>
                 </section>
                 <div className="carousel-details-staff">
-                    <CarouselDashboard name={"Films Favoris"} item={favoriteMovie}/>
+                    <CarouselList name={"Films Favoris"} item={favoriteMovie}/>
                 </div>
                 <div className="carousel-details-acteur">
-                    <CarouselDashboard name={"Films vus"} item={seeingMovie}/>
+                    <CarouselList name={"Films vus"} item={seeingMovie}/>
                 </div>
             </main>
         </Page>

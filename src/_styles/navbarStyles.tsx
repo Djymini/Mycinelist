@@ -24,7 +24,7 @@ export const navbarElementNav: CSSProperties = {
 export const navbarElementA: CSSProperties = {
     textDecoration: 'none',
     color: 'inherit',
-    margin: '0 16px 0 0',
+    margin: '0 32px 0 0',
 };
 
 export const searchBar: CSSProperties = {

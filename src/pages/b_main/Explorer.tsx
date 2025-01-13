@@ -14,7 +14,8 @@ const Explorer: FC<{}> = ({}) => {
     const [genre, setGenre] = useState("")
 
     const [page, setPage] = useState(2);
-    let currentpath: string = ""
+    let currentpath: string = "";
+    let numberOfPages = 1;
 
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -27,13 +28,14 @@ const Explorer: FC<{}> = ({}) => {
             let results:any
             if (genre === "")
             {
-                results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&sort_by=popularity.desc`);
-                currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&sort_by=popularity.desc`
+                results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`);
+                currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`
             }
             else {
                 results = await get(`/discover/movie?include_adult=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`)
                 currentpath = `/discover/movie?include_adult=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`
             }
+            numberOfPages = results.total_pages
             if (results && results.results) {
                 startTransition(() => {
                     setMovieCollection(results.results);
@@ -55,8 +57,8 @@ const Explorer: FC<{}> = ({}) => {
         setIsLoading(true);
         let results: any
         if (genre === "") {
-            results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&sort_by=popularity.desc`);
-            currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&sort_by=popularity.desc`
+            results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`);
+            currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`
         } else {
             results = await get(`/discover/movie?include_adult=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`)
             currentpath = `/discover/movie?include_adult=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`
@@ -68,14 +70,15 @@ const Explorer: FC<{}> = ({}) => {
     };
 
     useEffect(() => {
-        console.log(page)
         const scroll$ = fromEvent(window, 'scroll').pipe(
             debounceTime(300),
             switchMap(() => {
                 if (loadMoreRef.current) {
                     const rect = loadMoreRef.current.getBoundingClientRect();
                     if (rect.top <= window.innerHeight) {
-                        setPage(prevPage => prevPage + 1);
+                        if (page < numberOfPages){
+                            setPage(prevPage => prevPage + 1);
+                        }
                         return loadMovies();
                     }
                 }
@@ -95,11 +98,13 @@ const Explorer: FC<{}> = ({}) => {
                     <aside>
                         <DrawerExplorer/>
                     </aside>
+
                     <section className="explorer-movie-container">
                         {!isPending && movieCollection &&
                             movieCollection.map((movie, index) => (<MovieItem key={index} movie={movie}/>))
                         }
                     </section>
+
                     <div id="detector-end-page" ref={loadMoreRef} style={{height:'100px'}}></div>
                 </main>
             </Page>
