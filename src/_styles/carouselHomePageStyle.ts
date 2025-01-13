@@ -1,14 +1,23 @@
 import React, {CSSProperties} from 'react';
 import {palletteColor} from "./palletteColor";
 
+export const carouselBackground: CSSProperties = {
+    margin: '0',
+    padding: '32px 0',
+    backgroundImage: 'url("/homeBackground.jpg")',
+    opacity: '0.6',
+    filter: 'blur(8px)',
+    width: '100%',
+    height: '720px',
+};
 
 export const carouselHome: CSSProperties = {
-    margin: '8px auto',
-    backgroundColor: palletteColor.backgroundColor,
-    width: '1786px',
-    height: '784px',
-    padding: '1px 16px 0 16px',
-    borderRadius: '16px',
+    position: 'absolute',
+    top: '48px',
+    margin: '0',
+    padding: '32px 0',
+    width: '100%',
+    height: 'auto',
 };
 
 export const h2CarouselHomePageStyle: CSSProperties = {
@@ -18,11 +27,13 @@ export const h2CarouselHomePageStyle: CSSProperties = {
     textAlign: 'center',
     fontStyle: 'italic',
     color: palletteColor.textColor,
-    marginTop: '8px',
+    marginTop: '256px',
     marginBottom: '8px',
+    zIndex: 2,
 };
 
 export const carouselHomeElements: CSSProperties = {
+    margin: '32px 0',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

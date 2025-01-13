@@ -27,27 +27,45 @@ export const navbarElementA: CSSProperties = {
     margin: '0 16px 0 0',
 };
 
-export const navbarScroller: CSSProperties = {
-    padding: 0,
-    backgroundColor: palletteColor.buttonColor,
+export const searchBar: CSSProperties = {
     position: 'absolute',
-    zIndex: 10,
-    left: '30%',
-    top: '36px',
-    width: '600px',
+    right: '250px',
+    backgroundColor: palletteColor.buttonColor,
+    borderRadius: '24px',
+    width: '500px',
     height: 'auto',
-    maxHeight: '450px',
+    zIndex: 99,
+};
+
+export const searchElement: CSSProperties = {
+    padding: '0 16px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: 'auto',
+    height: '56px',
+}
+
+export const searchItem: CSSProperties = {
+    height: '100%',
+    display: "flex",
+}
+
+export const searchInput: CSSProperties = {
+    backgroundColor: "inherit",
+    border: 'none',
+    fontSize: '18px',
+    width: '70%',
+    fontFamily: "inherit",
+    margin: 'auto 8px auto 0',
+};
+
+export const searchScroller: CSSProperties = {
+    maxHeight: '500px',
     overflowY: 'scroll',
+    listStyle: 'none',
+    marginTop: '0',
+    padding: 0,
+    borderTop: `1px solid rgba(0, 0, 0, .6)`,
     scrollbarColor: palletteColor.textColor,
     scrollbarWidth: 'auto',
-    borderRadius: '5px',
-    boxShadow: '8px 8px 16px 8px var(black)',
-};
-
-export const navbarScrollerList: CSSProperties = {
-    listStyle: 'none',
-};
-
-export const navbarScrollerButtonP: CSSProperties = {
-    margin: 'auto 0 auto 8px',
 };

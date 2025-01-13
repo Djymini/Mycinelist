@@ -16,7 +16,7 @@ header {
     font-size: 25px;
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px;
+    padding: 8px 16px 24px 16px;
 }
 
 h1 {
@@ -42,6 +42,72 @@ footer a {
     color: inherit;
 }
 
+#search-button-open-bar {
+    background-color: var(--button-color);
+    position: absolute;
+    right: 250px;
+    width: 56px;
+    height: 56px;
+    border-radius: 30px;
+    border: none;
+}
+
+#search-button-open-bar:hover {
+    background-color: #32455BFF;
+    cursor: pointer;
+}
+
+#search-input {
+    color: var(--background-color);
+    background-color: inherit;
+    border: none;
+    font-size: 20px;
+    font-family: inherit;
+    margin: auto 8px auto 0;
+}
+
+#search-input:focus {
+    outline: none;
+}
+
+#search-button-close-bar {
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    height: 80%;
+    width: auto;
+    margin: auto 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(black, 0.5);
+}
+
+#search-button-close-bar:hover {
+    cursor: pointer;
+}
+
+.search-scroll-item {
+    padding: 8px 12px;
+    background-color: inherit;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    border: none;
+    border-radius: 0;
+}
+
+.search-scroll-item:hover {
+    cursor: pointer;
+    background-color: #32455BFF;
+}
+
+.search-scroll-item p {
+    font-size: 25px;
+    font-family: "Chakra Petch", serif;
+    text-align: left;
+    color: var(--text-color);
+    margin: auto 0 auto 16px;
+}
 
 #home-card {
     position: relative;
@@ -99,12 +165,13 @@ footer a {
 
 .movie-item-image {
     border-radius: 12px;
-    margin: 0 0;
-    transition: width 0.3s;
+    margin: 8px 0 8px 0;
+    max-height: 330px;
+    transition: scale 0.3s;
 }
 
 .movie-item-image:hover {
-    width: 232px;
+    scale: 1.1;
 }
 
 .movie-item-title {

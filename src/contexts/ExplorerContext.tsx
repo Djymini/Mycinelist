@@ -6,7 +6,6 @@ interface ExplorerContext {
     setYear1: any;
     year2: number;
     setYear2: any;
-    hydrateCollection: () => void;
     genre: string;
     setGenre: any;
 }

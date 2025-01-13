@@ -13,13 +13,10 @@ axios.defaults.params = {
 
 axios.interceptors.response.use(
     (response) => {
-        //console.log("interceptor response", response);
         return response;
     },
     (error) => {
         const {status} = error.response;
-       // console.log("interceptor error", error.response.status);
-        //console.log("interceptor status", status);
         switch (status) {
             case 400:
                 console.log("ERROR 400");
@@ -46,7 +43,6 @@ axios.interceptors.response.use(
 export const get = (url: string, config?: {}) => {
     return axios.get(url, config)
         .then((response) => {
-           // console.log("response", response);
             return response.data;
         })
         .catch((error) => {

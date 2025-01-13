@@ -16,7 +16,6 @@ const Navbar: FC<{isLogged:boolean}> = ({isLogged}) => {
 
     const handleLogout = async () => {
         dispatch({type: 'LOGOUT'});
-        console.log('User logged out');
         navigate("/")
 
     }
@@ -36,21 +35,25 @@ const Navbar: FC<{isLogged:boolean}> = ({isLogged}) => {
                         <a href="/Home" style={navbarElementA}>Accueil</a>
                         <a href="/Explorer" style={navbarElementA}>Explorer</a>
                     </nav>}
-                    <div className="vertical-line" style={{borderLeft: '2px solid', height: '47px', margin: 'auto 0'}}></div>
-            <Searchbar/>
             </div>
-            {isLogged ?
-                <Stack direction="row" spacing={2}>
-                    <IconButton sx={{height: '56px', width: '56px', backgroundColor: '#E0E1DD'}}>
-                        <AccountCircleIcon sx={{fontSize: '70px', color: '#415A77'}}/>
-                    </IconButton>
-                    <NavButton variant="contained" startIcon={<LoginIcon/>} onClick={handleLogout}>Se déconnecter</NavButton>
-                </Stack>
-                :
-                <Stack direction="row" spacing={2}>
-                    <NavButton variant="contained" startIcon={<CreateIcon/>}>S'inscrire</NavButton>
-                    <NavButton variant="contained" startIcon={<LoginIcon/>} onClick= {() => {navigate("/Login")}}>Se connecter</NavButton>
-                </Stack>}
+            <Stack direction="row" spacing={2}>
+                <Searchbar/>
+                {isLogged ?
+                    <>
+                        <IconButton sx={{height: '56px', width: '56px', backgroundColor: '#E0E1DD'}}>
+                            <AccountCircleIcon sx={{fontSize: '70px', color: '#415A77'}}/>
+                        </IconButton>
+                        <NavButton variant="contained" startIcon={<LoginIcon/>} onClick={handleLogout}>
+                            Se déconnecter
+                        </NavButton>
+                    </>
+                    :
+                    <>
+                        <NavButton variant="contained" startIcon={<LoginIcon/>} onClick={() => {navigate("/Login")}}>
+                            Se connecter
+                        </NavButton>
+                    </>}
+            </Stack>
         </>
     );
 };

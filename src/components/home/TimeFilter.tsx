@@ -24,7 +24,6 @@ const TimeFilter: FC<{}> = () => {
         }
         authContext?.setYear1(value1[0]);
         authContext?.setYear2(value1[1]);
-        authContext?.hydrateCollection();
     };
 
     return (

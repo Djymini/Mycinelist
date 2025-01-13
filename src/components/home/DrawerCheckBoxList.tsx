@@ -15,7 +15,7 @@ const DrawerCheckBoxList: FC<{}> = ({}) => {
 
     // Utilisation d'un état pour suivre les genres sélectionnés
     const [selectedGenres, setSelectedGenres] = useState<number[]>([]); // Liste des genres sélectionnés (par ID)
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [checkedGenres, setCheckedGenres] = useState<boolean[]>(new Array(GenreData.length).fill(false));
 
     const handleClick = () => {
@@ -34,7 +34,6 @@ const DrawerCheckBoxList: FC<{}> = ({}) => {
         } else {
             setSelectedGenres(prev => prev.filter(id => id !== genreId));  // Retirer l'ID si la case est décochée
         }
-        expContext?.hydrateCollection();
     };
 
     // Mettre à jour le contexte chaque fois que la liste des genres sélectionnés change

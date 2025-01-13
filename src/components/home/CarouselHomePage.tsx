@@ -4,10 +4,15 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import HomeCardMovie from "./HomeCardMovie";
 import Loading from "./Loading";
-import {carouselHome, carouselHomeElements, h2CarouselHomePageStyle} from "../../_styles/carouselHomePageStyle";
+import {
+    carouselBackground,
+    carouselHome,
+    carouselHomeElements,
+} from "../../_styles/carouselHomePageStyle";
+import {MovieType} from "../../@types/MovieType";
 
 
-const CarouselHomePage: FC<{arrayForCarousel:any, isLoading:boolean, isLogged:boolean}> = ({arrayForCarousel, isLoading, isLogged}) => {
+const CarouselHomePage: FC<{arrayForCarousel:MovieType[], isLoading:boolean, isLogged:boolean}> = ({arrayForCarousel, isLoading, isLogged}) => {
     const [indexCarousel, setIndexCarousel] = useState<number>(0);
 
     function handleNavigateBefore() {
@@ -27,28 +32,30 @@ const CarouselHomePage: FC<{arrayForCarousel:any, isLoading:boolean, isLogged:bo
     }
 
     return (
-        <section id="carousel-home" style={carouselHome}>
-            {isLoading ? (
-                <>
-                    <Loading />
-                </>
-            ) : (
-                <>
-                    <h2 style={h2CarouselHomePageStyle}>{arrayForCarousel[indexCarousel].title}</h2>
-                    <div id="carousel-home-elements" style={carouselHomeElements}>
-                        <IconButton aria-label="navigate-before" onClick={handleNavigateBefore}
-                                    sx={{height: '100px', width: '100px'}}>
-                            <NavigateBeforeIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
-                        </IconButton>
-                        <HomeCardMovie movie={arrayForCarousel[indexCarousel].movieResult} isLogged={isLogged}/>
-                        <IconButton aria-label="navigate-next" onClick={handleNavigateNext}
-                                    sx={{height: '100px', width: '100px'}}>
-                            <NavigateNextIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
-                        </IconButton>
-                    </div>
-                </>
-                )}
-        </section>
+        <>
+            <div className="background-image" style={carouselBackground}></div>
+            <section id="carousel-home" style={carouselHome}>
+                {isLoading ? (
+                    <>
+                        <Loading />
+                    </>
+                ) : (
+                    <>
+                        <div id="carousel-home-elements" style={carouselHomeElements}>
+                            <IconButton aria-label="navigate-before" onClick={handleNavigateBefore}
+                                        sx={{height: '100px', width: '100px'}}>
+                                <NavigateBeforeIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
+                            </IconButton>
+                            <HomeCardMovie movie={arrayForCarousel[indexCarousel]} isLogged={isLogged}/>
+                            <IconButton aria-label="navigate-next" onClick={handleNavigateNext}
+                                        sx={{height: '100px', width: '100px'}}>
+                                <NavigateNextIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
+                            </IconButton>
+                        </div>
+                    </>
+                    )}
+            </section>
+        </>
     );
 };
 
