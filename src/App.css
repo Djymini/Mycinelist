@@ -198,66 +198,12 @@ aside {
 }
 
 
-.details-movie-image{
-    position: absolute;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    opacity: 50%;
-}
 
-.details-movie {
-    position: relative;
-    top: 175px;
-}
 
-.details-movie-infos {
-    top: 100px;
-    display: flex;
-    padding: 32px;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    grid-termplate-rows: auto auto auto;
-    grid-template-areas:
-            "img title"
-            "img info"
-            "img synopsis"
-            "img button"
-}
 
-.details-movie-infos img {
-    grid-area: img;
-    border-radius: 16px;
-}
 
-.details-movie-infos h2 {
-    margin: 0 0 8px 0;
-    grid-area: title;
-    font-size: 40px;
-    text-shadow: 1px 1px 4px var(--background-color);
-}
 
-.details-movie-infos div {
-    margin: 0 0 16px 0;
-    grid-area: synopsis;
-}
 
-.details-movie-infos h3 {
-    font-size: 30px;
-    text-shadow: 1px 1px 4px var(--background-color);
-}
-
-.details-movie-infos p {
-    font-size: 25px;
-    text-shadow: 1px 1px 4px var(--background-color);
-}
-
-.details-movie-specifics {
-    margin: 0 0 16px 0;
-    grid-area: info;
-    font-size: 20px !important;
-    font-style: italic;
-}
 
 .carousel-details-staff {
     margin-top: 256px;

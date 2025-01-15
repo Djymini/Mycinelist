@@ -5,6 +5,13 @@ import {get} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import {CastType} from "../../@types/CastType";
 import CarouselDetails from "../../components/others/CarouselDetails";
+import {
+    detailsMovie,
+    detailsMovieImage,
+    detailsMovieInfos, detailsMovieInfosDiv, detailsMovieInfosH2, detailsMovieInfosH3,
+    detailsMovieInfosImage, detailsMovieInfosP, detailsMovieInfosSpecifics
+} from "../../_styles/movieDetailStyle";
+import {changeTheDate, displayHoursAndMinutes} from "../../_functions/displayManager";
 
 const MovieDetails: FC<{isLogged:boolean}> = ({isLogged}) => {
     const [movie, setMovie] = useState<MovieType>();
@@ -31,36 +38,32 @@ const MovieDetails: FC<{isLogged:boolean}> = ({isLogged}) => {
         hydrateMovie();
     }, [id]);
 
-    const hoursAndMinutes = (totalMinutes: number) => {
-        const minutes = totalMinutes % 60;
-        const hours = Math.floor(totalMinutes / 60);
-
-        return `${hours}h${minutes}m`;
-    };
 
     return (
         <Page title={"Détail"}>
                 <main>
                     {!isPending && movie && cast &&
                         <>
-                            <div className="details-movie-image">
+                            <div className="details-movie-image" style={detailsMovieImage}>
                                 <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} width={'100%'}/>
                             </div>
-                            <section className={"details-movie"}>
-                                <div className={"details-movie-infos"}>
-                                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                                         width={'300px'}/>
-                                    <h2>{movie.title}</h2>
-                                    <p className="details-movie-specifics">{`${hoursAndMinutes(movie.runtime)}, ${movie.genres.map((item) => item.name).join(', ')}`}</p>
-                                    <div>
-                                        <h3>Synopsis</h3>
-                                        <p>{movie.overview}</p>
+
+                            <section className="details-movie" style={detailsMovie}>
+                                <div className="details-movie-infos" style={detailsMovieInfos}>
+                                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} style={detailsMovieInfosImage}/>
+                                    <h2 style={detailsMovieInfosH2}>{movie.title}</h2>
+                                    <p className="details-movie-specifics" style={detailsMovieInfosSpecifics}>{`${changeTheDate(movie.release_date)} - ${displayHoursAndMinutes(movie.runtime)}, ${movie.genres.map((item) => item.name).join(', ')}`}</p>
+                                    <div style={detailsMovieInfosDiv}>
+                                        <h3 style={detailsMovieInfosH3}>Synopsis</h3>
+                                        <p style={detailsMovieInfosP}>{movie.overview}</p>
                                     </div>
                                 </div>
                             </section>
+
                             <div className="carousel-details-staff">
                                 <CarouselDetails name={"Equipe technique"} item={crew.filter(item => item.known_for_department !== "Acting")} />
                             </div>
+
                             <div className="carousel-details-acteur">
                                 <CarouselDetails name={"Acteurs"} item={cast} />
                             </div>

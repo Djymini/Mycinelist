@@ -7,56 +7,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import {MovieType} from "../../@types/MovieType";
 import {palletteColor} from "../../_styles/palletteColor";
 import {UserContext} from "../../contexts/UserMovieContext";
+import {changeTheDate, displayHoursAndMinutes} from "../../_functions/displayManager";
 
 const HomeCardMovie: FC<{movie:MovieType, isLogged:boolean}> = ({movie, isLogged}) => {
     const userContext = useContext(UserContext);
     const path = `/MovieDetails/${movie.id}`;
-
-    const DisplayHoursAndMinutes = (totalMinutes: number) => {
-        const minutes = totalMinutes % 60;
-        const hours = Math.floor(totalMinutes / 60);
-        if (hours < 1) {
-            return `${minutes} minutes`;
-        }
-        else if(minutes < 10 ){
-            return `${hours}h0${minutes}m`;
-        }
-        else {
-            return `${hours}h${minutes}m`;
-        }
-    };
-
-    const changeTheDate = (date: string) => {
-        const numbers = date.split('-');
-        switch (numbers[1]) {
-            case "01":
-                return numbers[2] + ' jan.'  + ' ' + numbers[0];
-            case "02":
-                return numbers[2] + ' fev.'  + ' ' + numbers[0];
-            case "03":
-                return numbers[2] + ' mar.' + ' ' + numbers[0];
-            case "04":
-                return numbers[2] + ' avr.' + ' ' + numbers[0];
-            case "05":
-                return numbers[2] + ' mai.' + ' ' + numbers[0];
-            case "06":
-                return numbers[2] + ' juin' + ' ' + numbers[0];
-            case "07":
-                return numbers[2] + ' jui.' + ' ' + numbers[0];
-            case "08":
-                return numbers[2] + ' aou.' + ' ' + numbers[0];
-            case "09":
-                return numbers[2] + ' sep.' + ' ' + numbers[0];
-            case "10":
-                return numbers[2] + ' oct.' + ' ' + numbers[0];
-            case "11":
-                return numbers[2] + ' nov.' + ' ' + numbers[0];
-            case "12":
-                return numbers[2] + ' dec.' + ' ' + numbers[0];
-            default:
-                return numbers[2] + '/' + numbers[1] + '/' + numbers[0];
-        }
-    }
 
     const addFavoriteMovie = () =>{
         if (userContext?.favoriteMovie) {
@@ -97,7 +52,7 @@ const HomeCardMovie: FC<{movie:MovieType, isLogged:boolean}> = ({movie, isLogged
             <div id="home-card-infos">
                 <h3>{movie.title}</h3>
                 <p>{changeTheDate(movie.release_date)}</p>
-                <p>{DisplayHoursAndMinutes(movie.runtime)}</p>
+                <p>{displayHoursAndMinutes(movie.runtime)}</p>
                 <div id="home-card-button-container">
                     {isLogged ? (
                             <>

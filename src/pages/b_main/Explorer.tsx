@@ -49,7 +49,7 @@ const Explorer: FC<{}> = ({}) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             hydrateCollection()
-        }, 500)
+        }, 1000)
         return () => clearTimeout(timer);
     }, [year1, year2,genre]);
 
