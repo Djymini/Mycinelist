@@ -37,7 +37,7 @@ const Navbar: FC<{isLogged:boolean}> = ({isLogged}) => {
                     </nav>}
             </div>
             <Stack direction="row" spacing={2}>
-                <Searchbar/>
+                <Searchbar userIsConnected={isLogged}/>
                 {isLogged ?
                     <>
                         <IconButton sx={{height: '56px', width: '56px', backgroundColor: '#E0E1DD'}}>

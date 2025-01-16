@@ -37,6 +37,16 @@ export const searchBar: CSSProperties = {
     zIndex: 99,
 };
 
+export const searchBarConnected: CSSProperties = {
+    position: 'absolute',
+    right: '358px',
+    backgroundColor: palletteColor.buttonColor,
+    borderRadius: '24px',
+    width: '500px',
+    height: 'auto',
+    zIndex: 99,
+};
+
 export const searchElement: CSSProperties = {
     padding: '0 16px',
     display: 'flex',

@@ -3,13 +3,20 @@ import {FC, useEffect, useRef, useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import {palletteColor} from "../../_styles/palletteColor";
-import {searchBar, searchElement, searchInput, searchItem, searchScroller} from "../../_styles/navbarStyles";
+import {
+    searchBar,
+    searchBarConnected,
+    searchElement,
+    searchInput,
+    searchItem,
+    searchScroller
+} from "../../_styles/navbarStyles";
 import {get} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
 
-const Searchbar: FC = () => {
+const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     const navigate = useNavigate();
 
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -45,6 +52,7 @@ const Searchbar: FC = () => {
     }
 
     useEffect(() => {
+        console.log(userIsConnected);
         const timer = setTimeout(() => {
             SearchSelection();
         }, 400)
@@ -54,11 +62,11 @@ const Searchbar: FC = () => {
     return (
         <>
             {!searchBarActive ?
-                    <button id="search-button-open-bar" onClick={() => setSearchBarActive(true)}>
+                    <button id="search-button-open-bar" onClick={() => setSearchBarActive(true)} style={userIsConnected ? {right: '358px'} : {right:'250px'}}>
                         <SearchIcon sx={{color: palletteColor.textColor, margin: 'auto', fontSize: '40px'}}/>
                     </button>
                 :
-                    <div id="search-bar" style={searchBar}>
+                    <div id="search-bar" style={userIsConnected ? searchBarConnected : searchBar}>
                         <div id="search-element" style={searchElement}>
                             <input id="search-input" type="search" ref={inputRef} autoComplete="off" placeholder="Nom du film recherché" style={searchInput} onKeyUp={UpdateResearch}/>
                             <span id="search-item" style={searchItem}>
@@ -76,6 +84,7 @@ const Searchbar: FC = () => {
                                     <button id="search-button-close-bar" onClick={() => setSearchBarActive(false)}>Fermer</button>
                             </span>
                         </div>
+
                         {(inputRef.current?.value !== "" && inputRef.current?.value !== undefined) &&
                             <ul className="scroll-container" style={searchScroller}>
                                 {(searchResult.length === 0) ?

@@ -45,7 +45,6 @@ footer a {
 #search-button-open-bar {
     background-color: var(--button-color);
     position: absolute;
-    right: 250px;
     width: 56px;
     height: 56px;
     border-radius: 30px;
