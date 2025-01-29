@@ -13,15 +13,15 @@ export const NavButton = styled(Button)<ButtonProps>(({}) => ({
     backgroundColor: palletteColor.buttonColor,
 }));
 
-export const navbarElement: CSSProperties = {
+export const navbarRightElementStyle: CSSProperties = {
     display: 'flex',
 };
 
-export const navbarElementNav: CSSProperties = {
+export const navStyle: CSSProperties = {
     margin: 'auto 0',
 };
 
-export const navbarElementA: CSSProperties = {
+export const linkStyle: CSSProperties = {
     textDecoration: 'none',
     color: 'inherit',
     margin: '0 32px 0 0',

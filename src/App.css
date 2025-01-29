@@ -12,6 +12,10 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+    z-index: 100;
     font-weight: 500;
     font-size: 25px;
     display: flex;
@@ -27,10 +31,14 @@ h1 {
 }
 
 main {
+    min-height: 1100px;
     padding-top: 16px;
+    margin-bottom: 128px;
 }
 
 footer {
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 128px;
     display: flex;
     justify-content: space-around;
     margin-top: 8px;
@@ -41,6 +49,11 @@ footer a {
     margin: auto;
     color: inherit;
 }
+
+aside {
+    float: left;
+}
+
 
 #search-button-open-bar {
     background-color: var(--button-color);
@@ -108,6 +121,8 @@ footer a {
     margin: auto 0 auto 16px;
 }
 
+
+
 #home-card {
     position: relative;
     width: 66%;
@@ -154,12 +169,21 @@ footer a {
     margin-top: 32px;
 }
 
+
 .movie-item {
+    text-align: center;
     width: 240px;
     border-radius: 12px;
     margin-left: 32px;
     margin-bottom: 16px;
     min-height: 460px;
+}
+
+.movie-item2 {
+    text-align: center;
+    width: 240px;
+    border-radius: 12px;
+    margin-left: 16px;
 }
 
 .movie-item-image {
@@ -192,23 +216,7 @@ footer a {
     padding: 0 0 0 16px;
 }
 
-aside {
-    float: left;
-}
-
-
-
-
-
-
-
-
-
-.carousel-details-staff {
-    margin-top: 256px;
-}
-
-.carousel-details-acteur {
+.carousel-details {
     margin-top: 80px;
 }
 

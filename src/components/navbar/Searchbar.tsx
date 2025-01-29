@@ -96,7 +96,10 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
                                         <h2 style={{margin: '8px 0 8px 12px'}}>Films</h2>
                                         {searchResult.map((movie) => (
                                             <li  key={movie.id}>
-                                                <button className="search-scroll-item" type="button" onClick={() => navigate(`/MovieDetails/${movie.id}`)}>
+                                                <button className="search-scroll-item" type="button" onClick={() => {
+                                                    navigate(`/MovieDetails/${movie.id}`)
+                                                    setSearchBarActive(false)
+                                                }}>
                                                     <img alt={movie.title} src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} style={{height: '100px'}}/>
                                                     <p>{movie.title}</p>
                                                 </button>

@@ -6,6 +6,7 @@ import {CastType} from "../../@types/CastType";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {buttonNavCarousel} from "../../_styles/carouselStyle";
+import {ButtonCarousel} from "../../_styles/CarouselListStyle";
 
 const CarouselDetails: FC<{name: string, item: any[]}> = ({name, item}) => {
     const allItemsRef = useRef<HTMLDivElement | null>(null);
@@ -20,20 +21,20 @@ const CarouselDetails: FC<{name: string, item: any[]}> = ({name, item}) => {
         }
     };
     return (
-        <Box sx={{width: '98%', margin: "60px auto"}}>
-            <Typography variant="h5" sx={{mb: 2, color: "white", marginLeft: "30px", fontWeight: 500,fontFamily: "Chakra Petch, serif" }}>
+        <Box sx={{width: '100%'}}>
+            <Typography variant="h5" sx={{color: "white", marginLeft: "30px", fontWeight: 800,fontFamily: "Chakra Petch, serif", fontSize: '30px', fontStyle: 'italic'}}>
                 {name}
             </Typography>
-            <Box sx={{display: "flex", alignItems: "center", backgroundColor: "#1B263B", marginBottom:"50px", borderRadius: '16px'}}>
-                <button onClick={() => scroll(allItemsRef, "left")} style={buttonNavCarousel}>
+            <Box sx={{display: "flex", alignItems: "center", justifyItems: 'center'}}>
+                <button onClick={() => scroll(allItemsRef, "left")} style={ButtonCarousel}>
                     <ArrowBackIosIcon sx={{width: "22px", height: "20px", marginLeft: "5px"}}/>
                 </button>
 
-                <Box ref={allItemsRef} sx={{display: "flex", overflowX: "hidden", gap: 2, padding: 2, scrollBehavior: "smooth", width: "100%", margin: "auto",}}>
-                    {item.map((element, index) => (<CastItem index={index} cast={element}/>))}
+                <Box ref={allItemsRef} sx={{display: "flex", overflowX: "hidden", gap: 2, scrollBehavior: "smooth", width: "100%", paddingTop: '16px'}}>
+                    {item.map((element, index) => (<CastItem index={index} title={element.name} subTitle={element.character} img={element.profile_path}/>))}`
                 </Box>
 
-                <button onClick={() => scroll(allItemsRef, "right")} style={buttonNavCarousel}>
+                <button onClick={() => scroll(allItemsRef, "right")} style={ButtonCarousel}>
                     <ArrowForwardIosIcon sx={{width: "22px", height: "20px",}}/>
                 </button>
             </Box>

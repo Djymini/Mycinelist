@@ -1,8 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Box, Button, TextField} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthentificationContext";
 import {SubmitHandler, useForm} from "react-hook-form";
+import axios from 'axios';
+
 
 interface LoginFormInput {
     email: string
@@ -12,6 +14,7 @@ interface LoginFormInput {
 const LoginForm: FC<{}> = ({}) => {
     const navigate = useNavigate()
     const {dispatch} = useAuth()
+
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
@@ -23,8 +26,7 @@ const LoginForm: FC<{}> = ({}) => {
     const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
         console.log(data)
         console.log(errors);
-        // Simulation d'une requête d'authentification
-        const fakeToken = '12345'; // Normalement obtenu depuis l'API
+        const fakeToken = '12345';
         dispatch({type: 'LOGIN', payload: {token: fakeToken}})
         setTimeout(() => {
             navigate('/');
@@ -81,7 +83,7 @@ const LoginForm: FC<{}> = ({}) => {
             >
                 Se connecter
             </Button>
-            <a id="form-link-sign" href="">S'inscrire</a>
+            <a id="form-link-sign" href="/Subscribe">S'inscrire</a>
         </Box>
     );
 };

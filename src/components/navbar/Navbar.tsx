@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {FC} from 'react';
 import LoginIcon from '@mui/icons-material/Login';
-import CreateIcon from '@mui/icons-material/Create';
 import Stack from '@mui/material/Stack';
-import {navbarElement, navbarElementA, navbarElementNav, NavButton} from "../../_styles/navbarStyles";
+import {
+    linkStyle,
+    navbarRightElementStyle,
+    NavButton, navStyle
+} from "../../_styles/navbarStyles";
 import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {useNavigate} from "react-router-dom";
@@ -22,20 +25,21 @@ const Navbar: FC<{isLogged:boolean}> = ({isLogged}) => {
 
     return (
         <>
-            <div className="navbar-elements" style={navbarElement}>
+            <div className="navbar-right-element" style={navbarRightElementStyle}>
                 <h1>MYCINELIST</h1>
                 {isLogged ?
-                    <nav style={navbarElementNav}>
-                        <a href="/Home" style={navbarElementA}>Accueil</a>
-                        <a href="/Explorer" style={navbarElementA}>Explorer</a>
-                        <a href="/Dashboard" style={navbarElementA}>Tableau de bord</a>
+                    <nav style={navStyle}>
+                        <a href="/Home" style={linkStyle}>Accueil</a>
+                        <a href="/Explorer" style={linkStyle}>Explorer</a>
+                        <a href="/Dashboard" style={linkStyle}>Tableau de bord</a>
                     </nav>
                     :
-                    <nav style={navbarElementNav}>
-                        <a href="/Home" style={navbarElementA}>Accueil</a>
-                        <a href="/Explorer" style={navbarElementA}>Explorer</a>
+                    <nav style={navStyle}>
+                        <a href="/Home" style={linkStyle}>Accueil</a>
+                        <a href="/Explorer" style={linkStyle}>Explorer</a>
                     </nav>}
             </div>
+
             <Stack direction="row" spacing={2}>
                 <Searchbar userIsConnected={isLogged}/>
                 {isLogged ?

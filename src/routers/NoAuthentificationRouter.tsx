@@ -7,6 +7,7 @@ import MovieDetails from "../pages/b_main/MovieDetails";
 import WithoutLayoutBar from "../layouts/WithoutLayoutBar";
 import Login from "../pages/b_main/Login";
 import Dashboard from "../pages/b_main/Dashboard";
+import Subscribe from "../pages/b_main/Subscribe";
 
 const NoAuthentificationRouter: FC<{}> = ({}) => {
     return (
@@ -19,6 +20,7 @@ const NoAuthentificationRouter: FC<{}> = ({}) => {
             </Route>
             <Route path="/" element={<WithoutLayoutBar/>}>
                 <Route path="/Login" index element={<Login/>}/>
+                <Route path="/Subscribe" index element={<Subscribe/>}/>
             </Route>
         </Routes>
     );

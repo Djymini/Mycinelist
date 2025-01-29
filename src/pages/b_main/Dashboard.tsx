@@ -8,7 +8,6 @@ const DashBoard: FC = () => {
     const userContext = useContext(UserContext);
     const [favoriteMovie, setFavoriteMovie] = useState<MovieType[]>([]);
     const [seeingMovie, setSeeingMovie] = useState<MovieType[]>([]);
-    console.log(userContext?.favoriteMovie);
 
     useEffect(() => {
         const savedFavorites = localStorage.getItem('favoriteMovies');

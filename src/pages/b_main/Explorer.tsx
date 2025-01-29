@@ -6,6 +6,7 @@ import {get} from "../../api/api";
 import {ExpContext} from "../../contexts/ExplorerContext";
 import {MovieType} from "../../@types/MovieType";
 import {debounceTime, fromEvent, switchMap} from "rxjs";
+import Loading from "../../components/home/Loading";
 
 const Explorer: FC<{}> = ({}) => {
     const [movieCollection, setMovieCollection] = useState<MovieType[]>([])
@@ -13,43 +14,33 @@ const Explorer: FC<{}> = ({}) => {
     const [year2, setYear2] = useState(2025)
     const [genre, setGenre] = useState("")
 
-    const [page, setPage] = useState(2);
-    let currentpath: string = "";
-    let numberOfPages = 1;
+    const [page, setPage] = useState(1);
+    const [nbPages, setNbPages] = useState<number>(1);
 
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isPending, startTransition] = useTransition()
 
-    function hydrateCollection() {
-        // @ts-ignore
-        startTransition(async () => {
-            setPage(2);
-            let results:any
-            if (genre === "")
-            {
-                results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`);
-                currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`
-            }
-            else {
-                results = await get(`/discover/movie?include_adult=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`)
-                currentpath = `/discover/movie?include_adult=false&language=fr-FR&page=${1}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`
-            }
-            numberOfPages = results.total_pages
-            if (results && results.results) {
-                startTransition(() => {
-                    setMovieCollection(results.results);
-                });
-            } else {
-                console.error("Aucune donnée dans 'results'");
-            }
-        })
+    const hydrateCollection = async () => {
+        let results: any
+        if (genre === "") {
+            results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`);
+        } else {
+            results = await get(`/discover/movie?include_adult=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`)
+        }
+        setNbPages(results.total_pages)
+        if (results && results.results) {
+            setMovieCollection(results.results);
+        } else {
+            console.error("Aucune donnée dans 'results'");
+        }
     }
 
     useEffect(() => {
         const timer = setTimeout(() => {
+            setPage(1);
             hydrateCollection()
-        }, 1000)
+        }, 500)
         return () => clearTimeout(timer);
     }, [year1, year2,genre]);
 
@@ -58,10 +49,8 @@ const Explorer: FC<{}> = ({}) => {
         let results: any
         if (genre === "") {
             results = await get(`/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`);
-            currentpath = `/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-12-31&primary_release_date.lte=${year2}-12-31&sort_by=popularity.desc`
         } else {
             results = await get(`/discover/movie?include_adult=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`)
-            currentpath = `/discover/movie?include_adult=false&language=fr-FR&page=${page}&primary_release_date.gte=${year1}-01-01&primary_release_date.lte=${year2}-01-30&sort_by=popularity.desc&with_genres=${genre.replaceAll(',', '%2C')}`
         }
         if (results && results.results) {
             setMovieCollection(prev => [...prev, ...results.results]);
@@ -75,11 +64,8 @@ const Explorer: FC<{}> = ({}) => {
             switchMap(() => {
                 if (loadMoreRef.current) {
                     const rect = loadMoreRef.current.getBoundingClientRect();
-                    if (rect.top <= window.innerHeight) {
-                        if (page < numberOfPages){
-                            setPage(prevPage => prevPage + 1);
-                        }
-                        return loadMovies();
+                    if (rect.top <= window.innerHeight && page <= nbPages) {
+                        setPage(prevState => prevState + 1)
                     }
                 }
                 return [];
@@ -89,6 +75,10 @@ const Explorer: FC<{}> = ({}) => {
         const subscription = scroll$.subscribe();
 
         return () => subscription.unsubscribe();
+    },);
+
+    useEffect(() => {
+        loadMovies()
     }, [page]);
 
     return (
@@ -105,7 +95,8 @@ const Explorer: FC<{}> = ({}) => {
                         }
                     </section>
 
-                    <div id="detector-end-page" ref={loadMoreRef} style={{height:'100px'}}></div>
+                    <div id="detector-end-page" ref={loadMoreRef} style={{height:'auto'}}>
+                    </div>
                 </main>
             </Page>
         </ExpContext.Provider>

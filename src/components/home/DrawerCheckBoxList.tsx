@@ -23,16 +23,15 @@ const DrawerCheckBoxList: FC<{}> = ({}) => {
     };
 
     const handleCheckboxChange = (index: number, genreId: number) => {
-        // Créer une copie de l'état des cases à cocher pour les mettre à jour
         const newCheckedGenres = [...checkedGenres];
-        newCheckedGenres[index] = !newCheckedGenres[index];  // Inverse l'état de la case à cocher
+        newCheckedGenres[index] = !newCheckedGenres[index];
         setCheckedGenres(newCheckedGenres);
 
         // Mettre à jour la liste des genres sélectionnés
         if (newCheckedGenres[index]) {
-            setSelectedGenres(prev => [...prev, genreId]);  // Ajouter l'ID du genre si la case est cochée
+            setSelectedGenres(prev => [...prev, genreId]);
         } else {
-            setSelectedGenres(prev => prev.filter(id => id !== genreId));  // Retirer l'ID si la case est décochée
+            setSelectedGenres(prev => prev.filter(id => id !== genreId));
         }
     };
 

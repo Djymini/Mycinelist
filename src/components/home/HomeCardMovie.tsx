@@ -24,21 +24,15 @@ const HomeCardMovie: FC<{movie:MovieType, isLogged:boolean}> = ({movie, isLogged
         }
     }
 
+    const addSeeingMovie = () => {
+        console.log("hello world");
+    }
+
     useEffect(() => {
         if (userContext?.favoriteMovie && userContext.favoriteMovie.length > 0) {
             localStorage.setItem('favoriteMovies', JSON.stringify(userContext?.favoriteMovie));
         }
     }, [userContext?.favoriteMovie]);
-
-    const addSeeingMovie = () => {
-        if (userContext?.seeingMovie) {
-            const isMovieInFavorites = userContext.seeingMovie.some((element) => element.id === movie.id);
-
-            if (!isMovieInFavorites) {
-                userContext.setSeeingMovie(prevState => prevState.concat(movie));
-            }
-        }
-    }
 
     return (
         <div id="home-card">
