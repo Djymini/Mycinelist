@@ -3,18 +3,11 @@ import {FC, useEffect, useRef, useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import {palletteColor} from "../../_styles/palletteColor";
-import {
-    searchBar,
-    searchBarConnected,
-    searchElement,
-    searchInput,
-    searchItem,
-    searchScroller
-} from "../../_styles/navbarStyles";
 import {get} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
+import styles from "../searchbar/Searchbar.module.css"
 
 const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     const navigate = useNavigate();
@@ -62,14 +55,14 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     return (
         <>
             {!searchBarActive ?
-                    <button id="search-button-open-bar" onClick={() => setSearchBarActive(true)} style={userIsConnected ? {right: '358px'} : {right:'250px'}}>
+                    <button className={styles.searchButtonOpenBar} onClick={() => setSearchBarActive(true)} style={userIsConnected ? {right: '160px'} : {right:'250px'}}>
                         <SearchIcon sx={{color: palletteColor.textColor, margin: 'auto', fontSize: '40px'}}/>
                     </button>
                 :
-                    <div id="search-bar" style={userIsConnected ? searchBarConnected : searchBar}>
-                        <div id="search-element" style={searchElement}>
-                            <input id="search-input" type="search" ref={inputRef} autoComplete="off" placeholder="Nom du film recherché" style={searchInput} onKeyUp={UpdateResearch}/>
-                            <span id="search-item" style={searchItem}>
+                    <div className={styles.searchbar} style={userIsConnected ? {right: '160px'} : {right:'250px'}}>
+                        <div className={styles.searchElement}>
+                            <input className={styles.searchInput} type="search" ref={inputRef} autoComplete="off" placeholder="Nom du film recherché" onKeyUp={UpdateResearch}/>
+                            <span className={styles.searchItem}>
                                     {(inputRef.current?.value && inputRef.current.value !== "") ?
                                         <>
                                             <IconButton sx={{height: '40px', width: '40px', margin: 'auto'}}
@@ -81,12 +74,12 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
                                         <SearchIcon sx={{color: palletteColor.textColor, margin: 'auto 0', fontSize: '40px'}}/>
                                     }
                                     <span className="vertical-line" style={{borderLeft: '2px solid', height: '50%', margin: 'auto 16px'}}></span>
-                                    <button id="search-button-close-bar" onClick={() => setSearchBarActive(false)}>Fermer</button>
+                                    <button className={styles.searchButtonCloseBar} onClick={() => setSearchBarActive(false)}>Fermer</button>
                             </span>
                         </div>
 
                         {(inputRef.current?.value !== "" && inputRef.current?.value !== undefined) &&
-                            <ul className="scroll-container" style={searchScroller}>
+                            <ul className={styles.searchScroller}>
                                 {(searchResult.length === 0) ?
                                     <>
                                         <p>Aucun résultat</p>
@@ -96,7 +89,7 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
                                         <h2 style={{margin: '8px 0 8px 12px'}}>Films</h2>
                                         {searchResult.map((movie) => (
                                             <li  key={movie.id}>
-                                                <button className="search-scroll-item" type="button" onClick={() => {
+                                                <button className={styles.searchScrollItem} type="button" onClick={() => {
                                                     navigate(`/MovieDetails/${movie.id}`)
                                                     setSearchBarActive(false)
                                                 }}>

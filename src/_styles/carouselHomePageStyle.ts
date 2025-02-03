@@ -30,8 +30,7 @@ export const h2CarouselHomePageStyle: CSSProperties = {
     textAlign: 'center',
     fontStyle: 'italic',
     color: palletteColor.textColor,
-    marginTop: '256px',
-    marginBottom: '8px',
+    margin: 'auto 0',
     zIndex: 2,
 };
 

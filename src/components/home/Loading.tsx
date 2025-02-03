@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
-import {h2CarouselHomePageStyle} from "../../_styles/carouselHomePageStyle";
+import Box from "@mui/material/Box";
+import {CircularProgress} from "@mui/material";
 
 const Loading: FC<{}> = ({}) => {
     return (
-        <>
-            <h2 className="loading" style={h2CarouselHomePageStyle}>🌀 Chargement...</h2>
-        </>
+        <Box sx={{display: 'flex', margin: 'auto'}}>
+            <CircularProgress size="150px"/>
+        </Box>
     );
 };
 

@@ -1,0 +1,105 @@
+:root {
+    --background-color: #0D1B2A;
+    --text-color: #E0E1DD;
+    --button-color: #415A77;
+}
+
+.searchbar {
+    position: absolute;
+    background-color: var(--button-color);
+    border-radius: 32px;
+    width: 500px;
+    height: auto;
+    z-index: 99;
+}
+
+.searchElement {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: 56px;
+}
+
+.searchItem {
+    height: 100%;
+    display: flex;
+}
+
+.searchInput {
+    background-color: inherit;
+    border: none;
+    font-size: 18px;
+    width: 70%;
+    font-family: inherit;
+    margin: auto 8px auto 0;
+    color: var(--background-color);
+}
+
+.searchInput:focus {
+    outline: none;
+}
+
+.searchScroller {
+    max-height: 500px;
+    overflow-y:  scroll;
+    list-style: none;
+    margin-top: 0;
+    padding: 0;
+    border-top: 1px solid rgba(0, 0, 0, .6);
+    scrollbar-color: var(--text-color);
+    scrollbar-width: auto;
+}
+
+.searchScrollItem {
+    padding: 8px 12px;
+    background-color: inherit;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    border: none;
+    border-radius: 0;
+}
+
+.searchScrollItem p {
+    font-size: 25px;
+    font-family: "Chakra Petch", serif;
+    text-align: left;
+    color: var(--text-color);
+    margin: auto 0 auto 16px;
+}
+
+.searchScrollItem:hover {
+    cursor: pointer;
+    background-color: #32455BFF;
+}
+
+.searchButtonOpenBar {
+    background-color: var(--button-color);
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    border-radius: 30px;
+    border: none;
+}
+
+.searchButtonOpenBar:hover {
+    background-color: #32455BFF;
+    cursor: pointer;
+}
+
+.searchButtonCloseBar {
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    height: 80%;
+    width: auto;
+    margin: auto 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.searchButtonCloseBar:hover {
+    color: var(--background-color);
+    cursor: pointer;
+}

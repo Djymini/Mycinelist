@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import {MovieType} from "../../@types/MovieType";
 import {palletteColor} from "../../_styles/palletteColor";
 import {UserContext} from "../../contexts/UserMovieContext";
-import {changeTheDate, displayHoursAndMinutes} from "../../_functions/displayManager";
+import {changeTheDate, displayHoursAndMinutes} from "../../_managers/displayManager";
 
 const HomeCardMovie: FC<{movie:MovieType, isLogged:boolean}> = ({movie, isLogged}) => {
     const userContext = useContext(UserContext);

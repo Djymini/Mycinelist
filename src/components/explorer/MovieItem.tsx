@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {MovieType} from "../../@types/MovieType";
-import {changeTheDate} from "../../_functions/displayManager";
+import {changeTheDate} from "../../_managers/displayManager";
 
 
 const MovieItem: FC<{ movie: MovieType}> = ({movie}) => {

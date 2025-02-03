@@ -41,7 +41,7 @@ const SubscribeForm: FC<{}> = ({}) => {
 
     const onSubmit: SubmitHandler<SubscribeFormInput> = (data) => {
         console.log(data)
-        deleteSubcribe(data);
+        registerSubcribe(data);
     };
 
     const {register, handleSubmit, formState: {errors}, watch } = useForm({

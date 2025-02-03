@@ -33,15 +33,23 @@ axios.interceptors.response.use(
     }
 );
 
-export const get = (url: string, config?: {}) => {
-    axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-    axios.defaults.params = {
+export const get = (url: string, config: any = {}) => {
+    const defaultParams = {
         api_key: "bbb18aeef38e4e6b4d2e948ab04abb3d",
         include_adult: false,
         include_video: false,
         language: "fr-FR"
-    }
-    return axios.get(url, config)
+    };
+
+    const finalConfig = {
+        ...config,
+        params: {
+            ...defaultParams,
+            ...config.params
+        }
+    };
+
+    return axios.get('https://api.themoviedb.org/3' + url, finalConfig)
         .then((response) => {
             return response.data;
         })
@@ -50,9 +58,19 @@ export const get = (url: string, config?: {}) => {
 
 }
 
+export const getCineDb = (url: string, config?: {}) => {
+    return axios.get('http://localhost:8080' + url, config)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            return Promise.reject(error);
+        })
+
+}
+
 export const postCineDb = (url: string, data: any,  config?: {}) => {
-    axios.defaults.baseURL = 'http://localhost:8080';
-    return axios.post(url, data, config)
+    return axios.post('http://localhost:8080' + url, data, config)
         .then((response) => {
             return response.data;
         })
@@ -63,8 +81,7 @@ export const postCineDb = (url: string, data: any,  config?: {}) => {
 }
 
 export const putCineDb = (url: string, data: any, config?: {}) => {
-    axios.defaults.baseURL = 'http://localhost:8080';
-    return axios.put(url, data, config)
+   return axios.put('http://localhost:8080' + url, data, config)
         .then((response) => {
             return response.data;
         })
@@ -75,13 +92,11 @@ export const putCineDb = (url: string, data: any, config?: {}) => {
 }
 
 export const deleteCineDb = (url: string, config?: {}) => {
-    axios.defaults.baseURL = 'http://localhost:8080';
-    return axios.delete(url, config)
+    return axios.delete('http://localhost:8080' + url, config)
         .then((response) => {
             return response;
         })
         .catch((error) => {
             return Promise.reject(error);
         })
-
 }

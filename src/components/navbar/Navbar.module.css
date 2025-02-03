@@ -1,0 +1,13 @@
+.navbarRightElements {
+    display: flex;
+}
+
+.nav {
+    margin: auto 0;
+}
+
+.a {
+    text-decoration: none;
+    color: inherit;
+    margin: 0 32px 0 0
+}

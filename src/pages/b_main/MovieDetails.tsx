@@ -17,7 +17,7 @@ import {
     detailsMovieInfosImage, detailsMovieInfosP, detailsMovieSynopsis,
     detailsMovieTimes, watchProviderContainer
 } from "../../_styles/movieDetailStyle";
-import {changeTheDate, displayHoursAndMinutes} from "../../_functions/displayManager";
+import {changeTheDate, displayHoursAndMinutes} from "../../_managers/displayManager";
 import {WatchProvider} from "../../@types/WatchProvider";
 import {ImageMovie} from "../../@types/ImageMovie";
 import ImageListItem from "@mui/material/ImageListItem";

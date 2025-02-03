@@ -2,7 +2,7 @@ import React, {useEffect, useState, useTransition} from 'react';
 import {FC} from 'react';
 import CarouselHomePage from "../../components/home/CarouselHomePage";
 import Page from "../../components/Layout/Page";
-import {get} from "../../api/api";
+import {get, getCineDb, postCineDb, putCineDb} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import CarousellDashboard from "../../components/Dashboard/CarouselList";
 
@@ -16,25 +16,16 @@ const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
 
     const [isPending, startTransition] = useTransition()
 
-    const pathForMovieSelection = [
-        "/movie/popular?language=fr-FR&page=1&region=FR",
-        "/movie/top_rated?language=fr-FR&page="+ Math.floor(Math.random() * 20) + 1 +"&region=FR",
-        "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + (Math.floor(Math.random() * 100) + 1) + "&release_date.lte=2005-12-31&sort_by=popularity.desc",
-        "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + (Math.floor(Math.random() * 100) + 1) + "&sort_by=popularity.desc&with_origin_country=FR",
-        "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + (Math.floor(Math.random() * 100) + 1) + "&sort_by=popularity.desc&with_genres=16",
-        "/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=" + (Math.floor(Math.random() * 100) + 1) + "&sort_by=popularity.desc&with_genres=99"
-    ]
-
     const SetupSelection = () => {
         // @ts-ignore
         startTransition(async () => {
+            let callMovieOfDay: any[] = await getCineDb("/movieSelection/all");
+
             const selectedMovies: MovieType[] = [];
-            for (let i = 0; i < pathForMovieSelection.length; i++) {
+            for (let i = 0; i < callMovieOfDay.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 150));
 
-                let callApi = await get(pathForMovieSelection[i]);
-                let randomChoiceInList = callApi.results[Math.floor(Math.random() * callApi.results.length)];
-                const selection: MovieType = await get(`/movie/${randomChoiceInList.id}?language=fr-FR`);
+                const selection: MovieType = await get(`/movie/${callMovieOfDay[i].movieId}?language=fr-FR`);
 
                 selectedMovies.push(selection);
             }
@@ -46,16 +37,16 @@ const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
     const SetupMoviesOnCinema = () => {
         // @ts-ignore
         startTransition(async () => {
-            let callApi = await get('/movie/now_playing?language=fr-FR&page=1&region=FR');
-            setMoviesOnTheatre(callApi.results.filter((movie: MovieType, index: number) => index < 10))
+            let callApi = await get('/movie/now_playing?page=1&region=FR');
+            setMoviesOnTheatre(callApi.results.filter((movie: MovieType, index: number) => index < 20))
         })
     }
 
     const SetupMoviesOnComming = () => {
         // @ts-ignore
         startTransition(async () => {
-            let callApi = await get('/movie/upcoming?language=fr-FR&page=1&region=FR');
-            setMoviesUpcoming(callApi.results.filter((movie: MovieType, index: number) => index < 10))
+            let callApi = await get('/movie/upcoming?page=1&region=FR');
+            setMoviesUpcoming(callApi.results.filter((movie: MovieType, index: number) => index < 20))
         })
     }
 

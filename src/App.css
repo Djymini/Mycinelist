@@ -11,18 +11,6 @@ body {
     color: var(--text-color);
 }
 
-header {
-    position: sticky;
-    top: 0;
-    background-color: var(--background-color);
-    z-index: 100;
-    font-weight: 500;
-    font-size: 25px;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 16px 24px 16px;
-}
-
 h1 {
     font-family: "Goldman", serif;
     font-weight: 700;
@@ -52,73 +40,6 @@ footer a {
 
 aside {
     float: left;
-}
-
-
-#search-button-open-bar {
-    background-color: var(--button-color);
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    border-radius: 30px;
-    border: none;
-}
-
-#search-button-open-bar:hover {
-    background-color: #32455BFF;
-    cursor: pointer;
-}
-
-#search-input {
-    color: var(--background-color);
-    background-color: inherit;
-    border: none;
-    font-size: 20px;
-    font-family: inherit;
-    margin: auto 8px auto 0;
-}
-
-#search-input:focus {
-    outline: none;
-}
-
-#search-button-close-bar {
-    color: inherit;
-    background-color: inherit;
-    border: none;
-    height: 80%;
-    width: auto;
-    margin: auto 0;
-    font-size: 20px;
-    font-weight: 500;
-    color: rgba(black, 0.5);
-}
-
-#search-button-close-bar:hover {
-    cursor: pointer;
-}
-
-.search-scroll-item {
-    padding: 8px 12px;
-    background-color: inherit;
-    width: 100%;
-    margin: 0;
-    display: flex;
-    border: none;
-    border-radius: 0;
-}
-
-.search-scroll-item:hover {
-    cursor: pointer;
-    background-color: #32455BFF;
-}
-
-.search-scroll-item p {
-    font-size: 25px;
-    font-family: "Chakra Petch", serif;
-    text-align: left;
-    color: var(--text-color);
-    margin: auto 0 auto 16px;
 }
 
 
