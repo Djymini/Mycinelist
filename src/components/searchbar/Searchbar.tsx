@@ -45,7 +45,6 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     }
 
     useEffect(() => {
-        console.log(userIsConnected);
         const timer = setTimeout(() => {
             SearchSelection();
         }, 400)

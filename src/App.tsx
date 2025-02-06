@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import './App.css';
 import {BrowserRouter} from "react-router-dom";
 import Router from "./routers/Router";
@@ -16,9 +16,11 @@ function App() {
     const [favoriteMovie, setFavoriteMovie] = useState<MovieType[]>([]);
     const [seeingMovie, setSeeingMovie] = useState<MovieType[]>([]);
 
-    const Routing = () => {
+   const Routing = () => {
+        console.log(state);
+        console.log(dispatch)
         return getToken() ? <Router/> : <NoAuthentificationRouter/>;
-    }
+    };
 
   return (
           <BrowserRouter>

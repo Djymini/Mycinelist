@@ -3,18 +3,46 @@ import Page from "../../components/Layout/Page";
 import {MovieType} from "../../@types/MovieType";
 import {UserContext} from "../../contexts/UserMovieContext";
 import CarouselList from "../../components/Dashboard/CarouselList";
+import {useAuth} from "../../contexts/AuthentificationContext";
+import {getToken} from "../../utilis/storage";
+import {getCineDb} from "../../api/api";
+
+interface cineUser {
+    email: string;
+    username: string;
+    role: string;
+}
 
 const DashBoard: FC = () => {
+    const {state} = useAuth();
+    const userToken = getToken();
+    const [user, setUser] = useState<cineUser>({email: "default", username: "default", role: "default"});
+    const [loading, setLoading] = useState<boolean>(true);
+
     const userContext = useContext(UserContext);
     const [favoriteMovie, setFavoriteMovie] = useState<MovieType[]>([]);
     const [seeingMovie, setSeeingMovie] = useState<MovieType[]>([]);
 
     useEffect(() => {
-        const savedFavorites = localStorage.getItem('favoriteMovies');
-        if (savedFavorites) {
-            setFavoriteMovie(JSON.parse(savedFavorites));
+        console.log(userToken);
+        if (userToken) {
+            const fetchUserData = async () => {
+                try {
+                    setLoading(true);
+                    const response = await getCineDb(`/user/connected`, {headers: {Authorization: `Bearer ${userToken}`}});
+                    console.log(response);
+                    setUser(response);
+                    setLoading(false);
+                } catch (error) {
+                    console.error('Erreur lors de la récupération des données utilisateur', error);
+                    setLoading(false);
+                }
+            };
+
+            fetchUserData();
         }
-    }, []);
+    }, [userToken, setFavoriteMovie, setSeeingMovie]);
+
 
     return (
         <Page title={"Détail"}>
@@ -34,15 +62,9 @@ const DashBoard: FC = () => {
                         <h2>User</h2>
                         <p className="details-movie-specifics">fan de film</p>
                         <div>
-                            <h3>Presentation</h3>
+                            <h3>{user.username}</h3>
                             <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                {user.email}
                             </p>
                         </div>
                     </div>

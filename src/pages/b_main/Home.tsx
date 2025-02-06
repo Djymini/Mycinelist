@@ -2,7 +2,7 @@ import React, {useEffect, useState, useTransition} from 'react';
 import {FC} from 'react';
 import CarouselHomePage from "../../components/home/CarouselHomePage";
 import Page from "../../components/Layout/Page";
-import {get, getCineDb, postCineDb, putCineDb} from "../../api/api";
+import {get, getCineDb} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import CarousellDashboard from "../../components/Dashboard/CarouselList";
 
@@ -25,7 +25,7 @@ const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
             for (let i = 0; i < callMovieOfDay.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 150));
 
-                const selection: MovieType = await get(`/movie/${callMovieOfDay[i].movieId}?language=fr-FR`);
+                const selection: MovieType = await get(`/movie/${callMovieOfDay[i].movieId}`);
 
                 selectedMovies.push(selection);
             }
@@ -37,7 +37,7 @@ const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
     const SetupMoviesOnCinema = () => {
         // @ts-ignore
         startTransition(async () => {
-            let callApi = await get('/movie/now_playing?page=1&region=FR');
+            let callApi = await get('/movie/now_playing?page=1');
             setMoviesOnTheatre(callApi.results.filter((movie: MovieType, index: number) => index < 20))
         })
     }

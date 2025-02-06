@@ -9,27 +9,11 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        const {status} = error.response;
-        switch (status) {
-            case 400:
-                console.log("ERROR 400");
-                break;
-            case 401:
-                console.log("ERROR 401");
-                console.log(Promise.reject(error?.response ?? error));
-                return Promise.reject(error?.response ?? error);
-            case 403:
-                console.log("ERROR 403");
-                break;
-            case 404:
-                console.log("ERROR 404");
-                break
-            case 500:
-                console.log("ERROR 500");
-                break;
-            default:
-                break;
-        }
+
+      return {
+          status: error.response.status,
+          response: error.response.data
+      };
     }
 );
 
@@ -70,9 +54,10 @@ export const getCineDb = (url: string, config?: {}) => {
 }
 
 export const postCineDb = (url: string, data: any,  config?: {}) => {
-    return axios.post('http://localhost:8080' + url, data, config)
+    const jsonData = JSON.stringify(data);
+    return axios.post('http://localhost:8080' + url, jsonData, config)
         .then((response) => {
-            return response.data;
+            return response;
         })
         .catch((error) => {
             return Promise.reject(error);

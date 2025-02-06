@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../contexts/AuthentificationContext";
 import {SubmitHandler, useForm} from "react-hook-form";
 import axios from 'axios';
+import {postCineDb} from "../../api/api";
 
 
 interface LoginFormInput {
@@ -16,21 +17,53 @@ const LoginForm: FC<{}> = ({}) => {
     const {dispatch} = useAuth()
 
 
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, formState: {errors}, setError} = useForm({
         defaultValues: {
             email: "",
             password: "",
         },
     })
 
+
+    const loginSubmit = async (loginInput: LoginFormInput) => {
+        const data = {
+            email: loginInput.email,
+            password: loginInput.password,
+        };
+
+       let response:any;
+        let token = "";
+        let isPending = true;
+
+        try {
+            response = await postCineDb('/auth/login', data);
+            console.log(response);
+            if(response.status === 200) {
+                dispatch({type: 'LOGIN', payload: {token: response.data}})
+                setTimeout(() => {
+                    navigate('/');
+                }, 50);
+            }
+            else {
+                setError("email", {
+                    type: "manual",
+                    message: "mail ou mot de passe incorrect",
+                });
+                setError("password", {
+                    type: "manual",
+                    message: "mail ou mot de passe incorrect",
+                });
+            }
+        } catch (error) {
+            isPending = false;
+            console.error('Erreur lors de la connexion:', error);
+        }
+
+        return {response, isPending};
+    }
+
     const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
-        console.log(data)
-        console.log(errors);
-        const fakeToken = '12345';
-        dispatch({type: 'LOGIN', payload: {token: fakeToken}})
-        setTimeout(() => {
-            navigate('/');
-        }, 50);
+        const token = loginSubmit(data);
     };
 
 
@@ -65,7 +98,10 @@ const LoginForm: FC<{}> = ({}) => {
                 label="Email"
                 variant="outlined"
                 sx={{marginBottom: 8, width: '100%', fontFamily: 'Chakra Petch, serif', fontSize: '16px', color: '#1B263B'}}
-                {...register("email")}
+                {...register("email", {required: "L'email est requis",
+                    pattern: {value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "L'adresse e-mail n'est pas valide"}})}
+                error={!!errors.email}
+                helperText={errors.email?.message}
             />
             <TextField
                 id="password"
@@ -73,7 +109,9 @@ const LoginForm: FC<{}> = ({}) => {
                 variant="outlined"
                 type="password"
                 sx={{marginBottom: 1, width: '100%', fontFamily: 'Chakra Petch, serif', fontSize: '16px', color: '#1B263B'}}
-                {...register("password")}
+                {...register("password", {required: "Un mot de passe est requis"})}
+                error={!!errors.password}
+                helperText={errors.password?.message}
             />
             <a id="form-link-mdp" href="">Mot de passe oublié ?</a>
             <Button

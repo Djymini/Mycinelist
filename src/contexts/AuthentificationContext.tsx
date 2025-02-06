@@ -6,6 +6,8 @@ interface AuthentificationContext {
     dispatch: Dispatch<AuthAction>;
 }
 
+export const AuthContext = createContext<AuthentificationContext | undefined>(undefined);
+
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -13,7 +15,3 @@ export const useAuth = () => {
     }
     return context;
 };
-
-
-
-export const AuthContext = createContext<AuthentificationContext | undefined>(undefined);
