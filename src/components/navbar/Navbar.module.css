@@ -2,12 +2,99 @@
     display: flex;
 }
 
-.nav {
+.navbarRightElements nav {
+    display: flex;
+    align-items: center;
     margin: auto 0;
 }
 
-.a {
+.navbarRightElements a {
     text-decoration: none;
     color: inherit;
     margin: 0 32px 0 0
+}
+
+.illustrationUser {
+    font-family: "Goldman", sans-serif;
+    font-size: 2em;
+    color: var(--background-color);
+    mix-blend-mode: difference;
+}
+
+.dropdown {
+    position: relative;
+    height: 56px;
+    width: 56px;
+    background-Color: #E0E1DD;
+    border-radius: 100%;
+}
+
+.dropdown div {
+    text-align: center;
+    font-family: "Goldman", sans-serif;
+    font-size: 50px;
+    color: var(--background-color);
+    mix-blend-mode: difference;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    top: 28px;
+    left: -16px;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.dropdownContent li{
+    margin: 0;
+    padding-left: 8px;
+    width: 100%;
+    list-style: none;
+}
+
+.dropdownContent a {
+    margin: 8px 8px 8px 0;
+    display: block;
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    color: var(--background-color);
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown:hover .dropdownContent {
+    cursor: pointer;
+    display: block;
+}
+
+.dropdownContent li:hover {
+    background-color: rgba(13, 27, 42, 0.25);
+}
+
+@media screen and (max-width: 1004px) {
+    .navbarRightElements h1 {
+        font-size: 4vw;
+        margin-right: 6vw;
+    }
+
+    .navbarRightElements a {
+        font-size: 2.5vw;
+        margin: auto 2vw auto 0;
+    }
+
+    .dropdown {
+        height: 5.6vw;
+        width: 5.6vw;
+    }
+
+    .dropdown div {
+        font-size: 5vw;
+    }
 }

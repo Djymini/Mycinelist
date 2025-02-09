@@ -1,37 +1,33 @@
-import React, {useEffect, useState, useTransition} from 'react';
+import React, {useEffect, useReducer, useState, useTransition} from 'react';
 import {FC} from 'react';
-import CarouselHomePage from "../../components/home/CarouselHomePage";
+import CarouselHomePage from "../../components/carouselHomePage/CarouselHomePage";
 import Page from "../../components/Layout/Page";
 import {get, getCineDb} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
-import CarousellDashboard from "../../components/Dashboard/CarouselList";
+import CarousellDashboard from "../../components/carouselList/CarouselList";
 
 
 const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [movieHome, setMovieHome] = useState<MovieType[]>([]);
+    const [isPending, startTransition] = useTransition()
 
+    const [movieHome, setMovieHome] = useState<MovieType[]>([]);
     const [moviesUpcoming, setMoviesUpcoming] = useState<MovieType[]>([]);
     const [moviesOnTheatre , setMoviesOnTheatre] = useState<MovieType[]>([]);
-
-    const [isPending, startTransition] = useTransition()
 
     const SetupSelection = () => {
         // @ts-ignore
         startTransition(async () => {
             let callMovieOfDay: any[] = await getCineDb("/movieSelection/all");
-
             const selectedMovies: MovieType[] = [];
             for (let i = 0; i < callMovieOfDay.length; i++) {
                 await new Promise((resolve) => setTimeout(resolve, 150));
-
                 const selection: MovieType = await get(`/movie/${callMovieOfDay[i].movieId}`);
-
                 selectedMovies.push(selection);
             }
             setMovieHome(selectedMovies);
             setIsLoading(false);
-    })
+        })
     }
 
     const SetupMoviesOnCinema = () => {
@@ -59,11 +55,11 @@ const Home: FC<{ isLogged: boolean }> = ({isLogged}) => {
     return (
         <Page title={"Accueil"}>
             {isLoading ? (
-                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading} isLogged={isLogged}/>
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={true} isLogged={isLogged}/>
             ) : movieHome[0] ? (
-                <CarouselHomePage arrayForCarousel={movieHome} isLoading={isLoading} isLogged={isLogged}/>
+                <CarouselHomePage arrayForCarousel={movieHome} isLoading={false} isLogged={isLogged}/>
             ) : (
-                <div>Aucune donnée disponible</div>
+                <div>Aucune film disponible</div>
             )}
             <CarousellDashboard name={"Au cinéma"} item={moviesOnTheatre} />
             <CarousellDashboard name={"A venir"} item={moviesUpcoming}/>

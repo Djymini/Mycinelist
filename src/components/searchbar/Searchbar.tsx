@@ -2,12 +2,12 @@ import * as React from 'react';
 import {FC, useEffect, useRef, useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import {palletteColor} from "../../_styles/palletteColor";
 import {get} from "../../api/api";
 import {MovieType} from "../../@types/MovieType";
 import IconButton from "@mui/material/IconButton";
 import {useNavigate} from "react-router-dom";
 import styles from "../searchbar/Searchbar.module.css"
+import {closeIconStyles, iconButtonStyles, searchIconStyles, searchIconStyles2,} from "./searchBarStyle";
 
 const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     const navigate = useNavigate();
@@ -54,25 +54,24 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
     return (
         <>
             {!searchBarActive ?
-                    <button className={styles.searchButtonOpenBar} onClick={() => setSearchBarActive(true)} style={userIsConnected ? {right: '160px'} : {right:'250px'}}>
-                        <SearchIcon sx={{color: palletteColor.textColor, margin: 'auto', fontSize: '40px'}}/>
+                    <button className={!userIsConnected ? styles.searchButtonOpenBar : styles.searchButtonOpenBarConnected} onClick={() => setSearchBarActive(true)}>
+                        <SearchIcon sx={searchIconStyles}/>
                     </button>
                 :
-                    <div className={styles.searchbar} style={userIsConnected ? {right: '160px'} : {right:'250px'}}>
+                    <div className={!userIsConnected ? styles.searchbar : styles.searchbarConnected}>
                         <div className={styles.searchElement}>
                             <input className={styles.searchInput} type="search" ref={inputRef} autoComplete="off" placeholder="Nom du film recherché" onKeyUp={UpdateResearch}/>
                             <span className={styles.searchItem}>
                                     {(inputRef.current?.value && inputRef.current.value !== "") ?
                                         <>
-                                            <IconButton sx={{height: '40px', width: '40px', margin: 'auto'}}
-                                                        onClick={DeleteResearch}>
-                                                <CloseIcon sx={{color: palletteColor.textColor, fontSize: '40px'}}/>
+                                            <IconButton sx={iconButtonStyles} onClick={DeleteResearch}>
+                                                <CloseIcon sx={closeIconStyles}/>
                                             </IconButton>
                                         </>
                                         :
-                                        <SearchIcon sx={{color: palletteColor.textColor, margin: 'auto 0', fontSize: '40px'}}/>
+                                        <SearchIcon sx={searchIconStyles2}/>
                                     }
-                                    <span className="vertical-line" style={{borderLeft: '2px solid', height: '50%', margin: 'auto 16px'}}></span>
+                                    <span className={styles.verticalLine}></span>
                                     <button className={styles.searchButtonCloseBar} onClick={() => setSearchBarActive(false)}>Fermer</button>
                             </span>
                         </div>
@@ -85,14 +84,14 @@ const Searchbar: FC<{ userIsConnected: boolean }> = ({userIsConnected}) => {
                                     </>
                                     :
                                     <>
-                                        <h2 style={{margin: '8px 0 8px 12px'}}>Films</h2>
+                                        <h2>Films</h2>
                                         {searchResult.map((movie) => (
                                             <li  key={movie.id}>
                                                 <button className={styles.searchScrollItem} type="button" onClick={() => {
                                                     navigate(`/MovieDetails/${movie.id}`)
                                                     setSearchBarActive(false)
                                                 }}>
-                                                    <img alt={movie.title} src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} style={{height: '100px'}}/>
+                                                    <img alt={movie.title} src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}/>
                                                     <p>{movie.title}</p>
                                                 </button>
                                             </li>

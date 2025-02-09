@@ -9,6 +9,8 @@ import {getToken} from "./utilis/storage";
 import NoAuthentificationRouter from "./routers/NoAuthentificationRouter";
 import {MovieType} from "./@types/MovieType";
 import {UserContext} from "./contexts/UserMovieContext";
+import {ThemeProvider} from "@mui/material";
+import mycinelistTheme from "./_themes/mycinelistTheme";
 
 
 function App() {
@@ -25,11 +27,13 @@ function App() {
   return (
           <BrowserRouter>
               <HelmetProvider>
-                  <AuthContext.Provider value={{state, dispatch}}>
-                      <UserContext.Provider value={{favoriteMovie, setFavoriteMovie, seeingMovie, setSeeingMovie}}>
-                          <Routing/>
-                      </UserContext.Provider>
-                  </AuthContext.Provider>
+                  <ThemeProvider theme={mycinelistTheme}>
+                      <AuthContext.Provider value={{state, dispatch}}>
+                          <UserContext.Provider value={{favoriteMovie, setFavoriteMovie, seeingMovie, setSeeingMovie}}>
+                              <Routing/>
+                          </UserContext.Provider>
+                      </AuthContext.Provider>
+                  </ThemeProvider>
               </HelmetProvider>
           </BrowserRouter>
   );

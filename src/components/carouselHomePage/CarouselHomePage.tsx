@@ -2,10 +2,10 @@ import React, {FC,useState} from 'react';
 import IconButton from '@mui/material/IconButton';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import HomeCardMovie from "./HomeCardMovie";
-import Loading from "./Loading";
-import {carouselBackground, carouselHome, carouselHomeElements} from "../../_styles/carouselHomePageStyle";
+import HomeCardMovie from "./homeCardMovie/HomeCardMovie";
+import Loading from "../home/Loading";
 import {MovieType} from "../../@types/MovieType";
+import styles from "../carouselHomePage/carouselHomePage.module.css"
 
 
 const CarouselHomePage: FC<{arrayForCarousel:MovieType[], isLoading:boolean, isLogged:boolean}> = ({arrayForCarousel, isLoading, isLogged}) => {
@@ -29,15 +29,15 @@ const CarouselHomePage: FC<{arrayForCarousel:MovieType[], isLoading:boolean, isL
 
     return (
         <>
-            <div className="background-image" style={carouselBackground}></div>
-            <section id="carousel-home" style={carouselHome}>
+            <div className={styles.carouselBackground}></div>
+            <section className={styles.carouselHome}>
                 {isLoading ? (
                     <>
                         <Loading />
                     </>
                 ) : (
                     <>
-                        <div id="carousel-home-elements" style={carouselHomeElements}>
+                        <div className={styles.carouselHomeElements}>
                             <IconButton aria-label="navigate-before" onClick={handleNavigateBefore} sx={{height: '100px', width: '100px'}}>
                                 <NavigateBeforeIcon sx={{fontSize: '150px', color: '#E0E1DD'}}/>
                             </IconButton>

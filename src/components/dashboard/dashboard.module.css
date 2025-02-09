@@ -1,0 +1,59 @@
+.main {
+    margin: 0;
+    width: 100%;
+    height: 848px;
+    display: grid;
+    grid-gap: 24px;
+    grid-template-columns: 1fr 412px 1fr 1fr;
+    grid-template-rows: 412px 412px;
+    grid-template-areas:
+            "userInfo lastMovie favoris favoris"
+            "userInfo list list list";
+}
+
+.userInfo {
+    grid-area: userInfo;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-color);
+    text-align: center;
+    align-items: center;
+}
+
+.illustrationUser {
+    background-color: var(--text-color);
+    width: 240px;
+    height: 240px;
+    border-radius: 100%;
+    align-content: center;
+}
+
+.illustrationUser div {
+    font-family: "Goldman", sans-serif;
+    font-size: 13em;
+    color: var(--background-color);
+    mix-blend-mode: difference;
+}
+
+.lastMovie {
+    grid-area: lastMovie;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-color);
+}
+
+.favoris {
+    grid-area: favoris;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-color);
+}
+
+.list {
+    grid-area: list;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-color);
+}

@@ -2,80 +2,74 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import Page from "../../components/Layout/Page";
 import {MovieType} from "../../@types/MovieType";
 import {UserContext} from "../../contexts/UserMovieContext";
-import CarouselList from "../../components/Dashboard/CarouselList";
 import {useAuth} from "../../contexts/AuthentificationContext";
-import {getToken} from "../../utilis/storage";
+import {getFavoriteMovie, getToken, getUsername, saveFavoriteMovie, saveUsername} from "../../utilis/storage";
 import {getCineDb} from "../../api/api";
+import {UserType} from "../../@types/UserType";
+import styles from "../../components/dashboard/dashboard.module.css";
+import DashboardUserInfos from "../../components/dashboard/userInfos/DashboardUserInfos";
+import DashboardLastMovie from "../../components/dashboard/lastMovie/DashboardLastMovie";
+import DashboardFavoris from "../../components/dashboard/favoris/DashboardFavoris";
+import DashboardList from "../../components/dashboard/list/DashboardList";
+import {MovieShortType} from "../../@types/MovieShortType";
 
-interface cineUser {
-    email: string;
-    username: string;
-    role: string;
-}
+
 
 const DashBoard: FC = () => {
     const {state} = useAuth();
     const userToken = getToken();
-    const [user, setUser] = useState<cineUser>({email: "default", username: "default", role: "default"});
+    const [user, setUser] = useState<UserType>({email: "", username: "", role: ""});
     const [loading, setLoading] = useState<boolean>(true);
 
     const userContext = useContext(UserContext);
-    const [favoriteMovie, setFavoriteMovie] = useState<MovieType[]>([]);
+    const [favoriteMovie, setFavoriteMovie] = useState<MovieShortType[]>([]);
     const [seeingMovie, setSeeingMovie] = useState<MovieType[]>([]);
 
-    useEffect(() => {
-        console.log(userToken);
-        if (userToken) {
-            const fetchUserData = async () => {
-                try {
-                    setLoading(true);
-                    const response = await getCineDb(`/user/connected`, {headers: {Authorization: `Bearer ${userToken}`}});
-                    console.log(response);
-                    setUser(response);
-                    setLoading(false);
-                } catch (error) {
-                    console.error('Erreur lors de la récupération des données utilisateur', error);
-                    setLoading(false);
-                }
-            };
-
-            fetchUserData();
+    const fetchUserData = async () => {
+        try {
+            setLoading(true);
+            const response = await getCineDb(`/user/connected`, {headers: {Authorization: `Bearer ${userToken}`}});
+            setUser(response);
+            setLoading(false);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données utilisateur', error);
+            setLoading(false);
         }
-    }, [userToken, setFavoriteMovie, setSeeingMovie]);
+    };
+
+    const fetchFavorite = async () => {
+        try {
+            setLoading(true);
+            const response = await getCineDb(`/movie/favorite`, {headers: {Authorization: `Bearer ${userToken}`}});
+            setFavoriteMovie(response);
+            setLoading(false);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données utilisateur', error);
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (userToken) {
+            fetchUserData();
+            fetchFavorite()
+        }
+    }, [userToken]);
+
+    useEffect(() => {
+        saveFavoriteMovie(favoriteMovie);
+        saveUsername(user.username);
+    }, [favoriteMovie, user]);
 
 
     return (
         <Page title={"Détail"}>
-            <main>
-                <div className="details-movie-image">
-                    {favoriteMovie[0] ? (
-                        <img src={`https://image.tmdb.org/t/p/original${favoriteMovie[0].backdrop_path}`}
-                             width={'100%'}/>
-                    ) : (
-                        <span></span>
-                    )}
-                </div>
-                <section className={"details-movie"}>
-                    <div className={"details-movie-infos"}>
-                        <img src="/placeholder-image-person-jpg.jpg" alt="Placeholder Person"
-                             width={'300px'}/>
-                        <h2>User</h2>
-                        <p className="details-movie-specifics">fan de film</p>
-                        <div>
-                            <h3>{user.username}</h3>
-                            <p>
-                                {user.email}
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <div className="carousel-details-staff">
-                    <CarouselList name={"Films Favoris"} item={favoriteMovie}/>
-                </div>
-                <div className="carousel-details-acteur">
-                    <CarouselList name={"Films vus"} item={seeingMovie}/>
-                </div>
-            </main>
+            <div className={styles.main}>
+                <DashboardUserInfos user={user}/>
+                <DashboardLastMovie user={user}/>
+                <DashboardFavoris list={favoriteMovie}/>
+                <DashboardList user={user}/>
+            </div>
         </Page>
     );
 };

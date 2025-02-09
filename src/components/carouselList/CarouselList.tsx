@@ -33,7 +33,7 @@ const CarouselList: FC<{ name: string, item: any[] }> = ({name, item}) => {
                 </button>
 
                 <Box ref={allItemsRef} sx={{display: "flex", overflowX: "hidden", gap: '20px', scrollBehavior: "smooth", width: "auto", margin: "0", padding: '16px 0'}}>
-                    {item.map((element, index) => (<MovieItem movie={element}/>))}
+                    {item.map((element, index) => (<MovieItem movie={element} key={index} />))}
                 </Box>
 
                 <button onClick={() => scroll(allItemsRef, "right")} style={ButtonCarousel}>
